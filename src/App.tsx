@@ -1,6 +1,7 @@
 import { ArrowDown, ArrowUpRight, Box, Bot, Layers3, Orbit, Sparkles, Workflow } from 'lucide-react';
 import { useEffect, useState, type CSSProperties } from 'react';
 import { HeroScene } from './components/HeroScene';
+import FlexCarousel from './components/FlexCarousel/FlexCarousel';
 
 const capabilities = [
   { n:'01', icon:Box, title:'Web & digital products', text:'Сайты, сервисы и интерфейсы, которые ощущаются как полноценный продукт.' },
@@ -9,6 +10,15 @@ const capabilities = [
   { n:'04', icon:Bot, title:'AI experiences', text:'AI-функции и интеллектуальные сценарии внутри реальных цифровых продуктов.' },
   { n:'05', icon:Workflow, title:'Systems & automation', text:'CRM, кабинеты, Telegram-боты, интеграции и автоматизация процессов.' },
   { n:'06', icon:Layers3, title:'Digital ecosystems', text:'Связываем интерфейсы, данные, сервисы и бизнес-логику в одну систему.' },
+];
+
+const showcaseItems = [
+  { src: 'https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?w=1400&q=85&auto=format&fit=crop', alt: 'Abstract chrome sculpture', title: 'WebGL / 01', subtitle: 'Realtime object' },
+  { src: 'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?w=1400&q=85&auto=format&fit=crop', alt: 'Liquid glass abstract form', title: 'Motion / 02', subtitle: 'Liquid interface' },
+  { src: 'https://images.unsplash.com/photo-1633412802994-5c058f151b66?w=1400&q=85&auto=format&fit=crop', alt: 'Futuristic digital form', title: '3D / 03', subtitle: 'Spatial experience' },
+  { src: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=1400&q=85&auto=format&fit=crop', alt: 'Geometric light composition', title: 'AI / 04', subtitle: 'Intelligent product' },
+  { src: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1400&q=85&auto=format&fit=crop', alt: 'Retro computer interface', title: 'UI / 05', subtitle: 'Product interface' },
+  { src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400&q=85&auto=format&fit=crop', alt: 'Digital analytics interface', title: 'Systems / 06', subtitle: 'Digital ecosystem' }
 ];
 
 const projects = [
@@ -35,6 +45,13 @@ export default function App() {
         <div className="hero-meta"><span>01 / 06</span><span>REALTIME WEBGL</span><span>SCROLL TO EXPLORE</span></div>
       </div>
       <div className="hero-visual"><div className="scene-caption"><span>PROCEDURAL OBJECT</span><span>60 FPS TARGET</span></div><HeroScene/><div className="visual-label"><span>WEBGL / REALTIME</span><span>DRAG · ROTATE</span></div></div>
+    </section>
+
+    <section className="hero-carousel-section" aria-label="Nexum Cloud capability showcase">
+      <div className="hero-carousel-head"><p className="eyebrow">LIVE SHOWCASE / 00</p><span>DRAG · SCROLL · CLICK</span></div>
+      <div className="hero-carousel">
+        <FlexCarousel items={showcaseItems} preset="liquid" intro="rise" cardHeight={0.58} gap={14} radius={20} squeeze={0.2} focusOnClick captions captureWheel />
+      </div>
     </section>
 
     <section id="showcase" className="manifesto">
