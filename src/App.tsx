@@ -334,7 +334,7 @@ export default function App(){
       </div>
     </section>
 
-    <section id="services" className="services-v2">
+    <section id="capabilities" className="services-v2">
       <div className="section-head-v2"><div><p className="eyebrow">03 / CAPABILITIES</p><h2>Всё необходимое<br/><em>в одном месте.</em></h2></div><p>От первого пикселя до инфраструктуры. Можно взять отдельный слой или собрать полноценную систему.</p></div>
       <div className="services-v2-grid">{capabilities.map(({n,title,text,icon:Icon},i)=><motion.article className="service-v2" key={n} initial="hidden" whileInView="show" viewport={{once:true,amount:.12}} variants={reveal} transition={{delay:i*.05}}>
         <div className="service-v2-top"><span>{n}</span><Icon size={21} strokeWidth={1.5}/></div><h3>{title}</h3><p>{text}</p><span className="service-v2-arrow"><ArrowUpRight size={17}/></span>
