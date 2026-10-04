@@ -308,3 +308,23 @@ body:after{content:'';position:fixed;z-index:-1;inset:0;pointer-events:none;back
   .about-native-caption{left:12px;right:12px;bottom:12px;padding:11px 12px}
   .about-native-caption small{font-size:8px}
 }
+
+/* WORKING MOCKUP CAROUSEL CONTROLS */
+.about-native-carousel{position:relative;height:100%;min-height:0}
+.about-native-carousel .about-native-track{scroll-behavior:smooth;scrollbar-width:none;padding-left:72px;padding-right:72px}
+.about-carousel-control{
+  position:absolute;z-index:8;top:50%;transform:translateY(-50%);
+  width:48px;height:48px;border:1px solid rgba(255,255,255,.92);border-radius:50%;
+  background:rgba(255,255,255,.78);color:#1e2633;font:400 30px/1 Arial,sans-serif;
+  display:grid;place-items:center;cursor:pointer;backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);box-shadow:0 12px 30px rgba(40,55,85,.16),inset 0 1px rgba(255,255,255,.98);
+  transition:transform .2s ease,background .2s ease,box-shadow .2s ease
+}
+.about-carousel-control:hover{transform:translateY(-50%) scale(1.06);background:#fff;box-shadow:0 16px 36px rgba(40,55,85,.20)}
+.about-carousel-control.prev{left:18px}
+.about-carousel-control.next{right:18px}
+@media(max-width:560px){
+  .about-native-carousel .about-native-track{padding-left:54px;padding-right:54px}
+  .about-carousel-control{width:40px;height:40px;font-size:25px}
+  .about-carousel-control.prev{left:10px}.about-carousel-control.next{right:10px}
+}
