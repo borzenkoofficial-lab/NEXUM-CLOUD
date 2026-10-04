@@ -36,7 +36,6 @@ const questions = [
 export default function CommercialSuite(){
   const [step,setStep]=useState(0);
   const [answers,setAnswers]=useState<string[]>([]);
-  const [portal,setPortal]=useState(false);
   const [briefName,setBriefName]=useState('');
   const [briefContact,setBriefContact]=useState('');
   const [briefSubmitting,setBriefSubmitting]=useState(false);
@@ -78,12 +77,10 @@ export default function CommercialSuite(){
 
     <section id="care" className="commercial-section care-section-pro"><div className="commercial-head compact"><div><p className="eyebrow">NEXUM / CARE</p><h2>После запуска<br/><em>мы остаёмся.</em></h2></div><p>Поддержка превращает разовую разработку в постоянно развивающийся цифровой продукт.</p></div><div className="care-grid-pro">{carePlans.map((plan,i)=><div className={'care-card-pro '+(i===1?'featured':'')} key={plan.name}><span>{plan.name}</span><h3>{plan.price}</h3><p>{plan.text}</p><ul>{plan.items.map(x=><li key={x}><Check size={14}/>{x}</li>)}</ul><a href="#brief">Подключить <ArrowRight size={15}/></a></div>)}</div></section>
 
-    <section id="client" className="commercial-section client-section-pro"><div className="client-portal-pro"><div className="portal-copy"><p className="eyebrow">NEXUM / CLIENT SPACE</p><h2>Ваш проект<br/><em>в одном месте.</em></h2><p>Следите за этапами, файлами, согласованиями и запуском без бесконечных переписок.</p><button onClick={()=>setPortal(true)}>Посмотреть кабинет <ArrowRight size={16}/></button></div><div className="portal-preview"><div className="portal-bar"><span>CLIENT SPACE</span><b>PROJECT / 001</b></div><div className="portal-status"><div><span>Website / Digital product</span><strong>68%</strong></div><div className="portal-meter"><i/></div></div>{['Бриф','Концепция','Дизайн','Разработка','Запуск'].map((x,i)=><div className="portal-row" key={x}><span>0{i+1}</span><b>{x}</b><em>{i<3?'DONE':i===3?'IN PROGRESS':'NEXT'}</em></div>)}</div></div></section>
-
     <section id="trust" className="commercial-section trust-section-pro"><div className="trust-strip"><div><ShieldCheck size={20}/><b>Прозрачный процесс</b><span>Понятные этапы и стоимость.</span></div><div><FileText size={20}/><b>Документы</b><span>Договор, оферта и политика.</span></div><div><Zap size={20}/><b>Запуск</b><span>Домен, SSL и передача проекта.</span></div><div><MessageCircle size={20}/><b>Связь</b><span>Команда остаётся на связи.</span></div></div></section>
 
     <section id="contact" className="commercial-section contact-pro"><p className="eyebrow">NEXUM / START</p><h2>Есть задача?<br/><em>Соберём решение.</em></h2><div className="contact-actions-pro"><a href="#brief">Заполнить бриф <ArrowRight size={17}/></a><a href={import.meta.env.VITE_TELEGRAM_URL || "#brief"} target={import.meta.env.VITE_TELEGRAM_URL ? "_blank" : undefined} rel={import.meta.env.VITE_TELEGRAM_URL ? "noreferrer" : undefined}><MessageCircle size={17}/> Telegram</a><a href={import.meta.env.VITE_MAX_URL || "#brief"} target={import.meta.env.VITE_MAX_URL ? "_blank" : undefined} rel={import.meta.env.VITE_MAX_URL ? "noreferrer" : undefined}><MessageCircle size={17}/> MAX</a></div></section>
 
-    <AnimatePresence>{portal&&<motion.div className="portal-modal-pro" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><motion.div className="portal-modal-card" initial={{y:30,scale:.98}} animate={{y:0,scale:1}}><button className="portal-close" onClick={()=>setPortal(false)}>×</button><p className="eyebrow">NEXUM / CLIENT SPACE</p><h3>Проект «Digital Product»</h3><div className="modal-progress"><i/></div><div className="modal-stage"><span>Текущий этап</span><b>Разработка</b><small>Следующее обновление после проверки сборки.</small></div><div className="modal-files"><span>Файлы проекта</span><b>Brief · Design · Build</b></div></motion.div></motion.div>}</AnimatePresence>
+
   </div>;
 }
