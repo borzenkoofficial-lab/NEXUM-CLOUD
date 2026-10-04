@@ -77,7 +77,21 @@ function BriefForm({product}:{product?:typeof marketProducts[number]}){
 function MarketPage(){
   return <main className="market-page">
     <nav className="nav"><a className="brand" href="/"><span className="brand-mark">N</span><span>NEXUM CLOUD</span></a><div className="nav-links"><a href="/">Студия</a><a className="active" href="/market">Маркет</a><a href="/#projects">Проекты</a></div><a className="nav-cta glass-button" href="#market-form">Обсудить проект <ArrowUpRight size={15}/></a></nav>
-    <section className="market-hero"><p className="eyebrow">NEXUM CLOUD / MARKET</p><h1>Готовые решения.<br/><em>Собраны под задачу.</em></h1><p>Выберите услугу, откройте продукт и посмотрите, что входит в работу, сроки и стоимость.</p></section>
+    <section className="market-hero market-hero-store" aria-label="NEXUM Cloud Market">
+      <div className="market-hero-scene">
+        <div className="market-flow">
+          <div className="market-node market-node-buy"><span>+</span><b>BUY</b></div>
+          <div className="market-node market-node-pay"><span>◈</span><b>PAY</b></div>
+          <div className="market-node market-node-add"><span>↗</span><b>ADD</b></div>
+          <div className="market-node market-node-out"><span>−</span><b>OUT</b></div>
+          <div className="market-core"><span>N</span><i></i></div>
+          <div className="market-particle particle-one"></div><div className="market-particle particle-two"></div><div className="market-particle particle-three"></div>
+        </div>
+        <div className="market-flow-line line-one"></div><div className="market-flow-line line-two"></div>
+        <div className="market-wallet"><div className="wallet-top"><span>NEXUM</span><b>•••• 2481</b></div><strong>₽ 128 400</strong><small>AVAILABLE BALANCE</small><div className="wallet-bars"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+        <div className="market-transaction"><span className="tx-dot"></span><div><b>Digital product</b><small>Payment completed</small></div><strong>+ ₽49 000</strong></div>
+      </div>
+    </section>
     <section className="market-grid">{marketProducts.map((p,i)=><motion.a href={`/market/${p.slug}`} className="market-card" key={p.slug} initial={{opacity:0,y:24}} whileInView={{opacity:1,y:0}} viewport={{once:true,amount:.1}} transition={{delay:i*.035}} whileHover={{y:-8}}><div className="market-card-visual"><img src={p.src} alt=""/><span>{p.tag}</span></div><div className="market-card-info"><div><small>{String(i+1).padStart(2,'0')}</small><h2>{p.title}</h2><p>{p.text}</p></div><div className="market-card-bottom"><b>{p.price}</b><span><ArrowUpRight size={17}/></span></div></div></motion.a>)}</section>
     <section id="market-form" className="market-form-section"><BriefForm /></section>
     <footer className="footer-v2"><div><b>NEXUM CLOUD</b><span>Цифровые продукты и системы.</span></div><a href="#market-form">Обсудить проект <ArrowUpRight size={15}/></a></footer>
