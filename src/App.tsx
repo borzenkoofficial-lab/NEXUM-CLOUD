@@ -2,6 +2,7 @@ import { ArrowDown, ArrowUpRight, Bot, Database, Globe2, Layers3, Orbit, Sparkle
 import { AnimatePresence, motion, useScroll, useTransform, type Variants } from 'motion/react';
 import { useEffect, useState } from 'react';
 import ExperienceSuite from './components/ExperienceSuite';
+import CommercialSuite from './components/CommercialSuite';
 
 
 function NexumWelcome(){
@@ -227,7 +228,7 @@ export default function App(){
     <nav className="nav">
       <a className="brand" href="#"><span className="brand-mark">N</span><span>NEXUM CLOUD</span></a>
       <div className="nav-links">
-        <a href="#about">Студия</a><a href="#showcase">Витрина</a><a href="/market">Маркет</a><a href="#projects">Проекты</a>
+        <a href="#services">Услуги</a><a href="#cases">Кейсы</a><a href="/market">Маркет</a><a href="#brief">Бриф</a>
       </div>
       <a className="nav-cta glass-button" href="#contact">Обсудить проект <ArrowUpRight size={15}/></a>
     </nav>
@@ -346,6 +347,8 @@ export default function App(){
     </section>
 
     <ExperienceSuite />
+
+    <CommercialSuite />
 
     <section id="projects" className="projects-v2">
       <div className="section-head-v2"><div><p className="eyebrow">07 / SELECTED WORK</p><h2>То, что мы<br/><em>строим сами.</em></h2></div><p>Nexum — не только студия. Мы постоянно создаём собственные продукты и проверяем технологии на себе.</p></div>
