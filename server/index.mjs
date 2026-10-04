@@ -95,6 +95,32 @@ async function sendTelegram(lead){
   if(!result.ok) throw new Error('Telegram rejected the message');
 }
 
+async function sendMax(lead){
+  const token=process.env.MAX_BOT_TOKEN;
+  const chatId=process.env.MAX_CHAT_ID;
+  if(!token || !chatId) throw new Error('MAX is not configured');
+  const text=[
+    '🔔 НОВАЯ ЗАЯВКА NEXUM CLOUD',
+    '',
+    'Имя: '+clean(lead.name,120),
+    'Контакт: '+clean(lead.contact,180),
+    'Услуга: '+clean(lead.service,180),
+    'Бюджет: '+clean(lead.budget,120),
+    'Срок: '+clean(lead.deadline,120),
+    lead.task ? 'Задача: '+clean(lead.task,1500) : '',
+    lead.source ? 'Источник: '+clean(lead.source,120) : '',
+    lead.details ? 'Детали: '+clean(lead.details,1800) : '',
+    '',
+    new Date().toLocaleString('ru-RU')
+  ].filter(Boolean).join('\\n');
+  const response=await fetch('https://platform-api2.max.ru/messages?chat_id='+encodeURIComponent(chatId),{
+    method:'POST',
+    headers:{'content-type':'application/json','Authorization':token},
+    body:JSON.stringify({text,format:'markdown',notify:true})
+  });
+  if(!response.ok) throw new Error('MAX HTTP '+response.status);
+}
+
 async function serveStatic(req,res){
   let pathname=new URL(req.url,'http://localhost').pathname;
   if(pathname==='/') pathname='/index.html';
@@ -138,10 +164,18 @@ const server=createServer(async(req,res)=>{
       };
       if(!lead.name || !lead.contact) return json(res,400,{ok:false,error:'Укажите имя и контакт.'});
       if(!lead.service) return json(res,400,{ok:false,error:'Выберите услугу.'});
-      if(!process.env.TELEGRAM_BOT_TOKEN || !process.env.TELEGRAM_CHAT_ID){
+      const telegramReady=Boolean(process.env.TELEGRAM_BOT_TOKEN && process.env.TELEGRAM_CHAT_ID);
+      const maxReady=Boolean(process.env.MAX_BOT_TOKEN && process.env.MAX_CHAT_ID);
+      if(!telegramReady && !maxReady){
         return json(res,503,{ok:false,error:'Канал уведомлений пока не настроен.'});
       }
-      await sendTelegram(lead);
+      const deliveries=[];
+      if(telegramReady) deliveries.push(sendTelegram(lead));
+      if(maxReady) deliveries.push(sendMax(lead));
+      const results=await Promise.allSettled(deliveries);
+      if(results.every(result=>result.status==='rejected')){
+        throw new Error('All notification channels failed');
+      }
       return json(res,200,{ok:true,message:'Заявка отправлена.'});
     }
     if(req.method!=='GET' && req.method!=='HEAD') return json(res,405,{ok:false,error:'Method not allowed'});
