@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowUpRight, Bot, Database, Globe2, Layers3, Orbit, Sparkles, Smartphone, Workflow, Zap, Check, Plus } from 'lucide-react';
+import { ArrowDown, ArrowUpRight, Bot, Database, Globe2, Layers3, Orbit, Sparkles, Smartphone, Workflow, Zap, Check } from 'lucide-react';
 import { AnimatePresence, motion, useScroll, useTransform, type Variants } from 'motion/react';
 import { useEffect, useState } from 'react';
 
