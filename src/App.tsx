@@ -224,12 +224,31 @@ export default function App(){
       <motion.div className="hero-v2-stage glass-panel" onPointerMove={(e)=>{const r=e.currentTarget.getBoundingClientRect();const x=e.clientX-r.left;const y=e.clientY-r.top;const edge=Math.min(x,y,r.width-x,r.height-y);const proximity=Math.max(0,Math.min(1,1-edge/150));e.currentTarget.style.setProperty('--glow-x',(x/r.width)*100+'%');e.currentTarget.style.setProperty('--glow-y',(y/r.height)*100+'%');e.currentTarget.style.setProperty('--edge-alpha',proximity.toFixed(3));e.currentTarget.style.setProperty('--glow-angle',(Math.atan2(y-r.height/2,x-r.width/2)*180/Math.PI+90)+'deg')}} onPointerLeave={(e)=>e.currentTarget.style.setProperty('--edge-alpha','0')} initial={{opacity:0,scale:.96}} animate={{opacity:1,scale:1}} transition={{duration:1,delay:.15}}><span className="stage-glow-beacon" />
         <div className="stage-top"><span>NEXUM / LIVE EXPERIENCE</span><span>0{heroIndex+1} / 04</span></div>
         <div className="stage-orbit orbit-one"/><div className="stage-orbit orbit-two"/>
-        <div className="stage-core">
-          <div className="stage-core-inner"><span>N</span><small>NX</small></div>
+        <div className="award-stage">
+          <div className="award-stage-glow"/>
+          <div className="award-main">
+            <span className="award-kicker">NEXUM / AWARDS · 2026</span>
+            <div className="award-emblem"><span>N</span><small>NX</small></div>
+            <p>НОМИНАЦИЯ</p>
+            <h2>Разработчики<br/><em>года</em></h2>
+            <div className="award-rule"/>
+            <div className="award-meta"><span>DIGITAL PRODUCT / TECHNOLOGY</span><b>01 / 04</b></div>
+          </div>
+          <div className="award-card award-card-alpha">
+            <span>PARTNER AWARD</span><b>ALFA BANK</b><small>Награда / special recognition</small>
+          </div>
+          <div className="award-card award-card-product">
+            <span>DIGITAL PRODUCT</span><b>Продукт года</b><small>Design · Technology · Experience</small>
+          </div>
+          <div className="award-card award-card-team">
+            <span>TEAM</span><b>Команда года</b><small>Engineering / Creative</small>
+          </div>
+          <div className="award-card award-card-vision">
+            <span>VISION</span><b>За технологичность</b><small>Innovation / 2026</small>
+          </div>
         </div>
-        <div className="stage-word"><AnimatePresence mode="wait"><motion.span key={heroWords[heroIndex]} initial={{opacity:0,y:20,filter:'blur(8px)'}} animate={{opacity:1,y:0,filter:'blur(0)'}} exit={{opacity:0,y:-20,filter:'blur(8px)'}}>{heroWords[heroIndex]}</motion.span></AnimatePresence></div>
         <div className="stage-caption"><b>Цифровая среда</b><span>WEB · AI · 3D · AUTOMATION</span></div>
-        <div className="stage-float float-a glass-button"><span className="status-dot"/> LIVE SYSTEM</div>
+        <div className="stage-float float-a glass-button"><span className="status-dot"/> AWARD / 2026</div>
         <div className="stage-float float-b glass-button">SCROLL / EXPLORE <ArrowDown size={13}/></div>
       </motion.div>
     </section>
