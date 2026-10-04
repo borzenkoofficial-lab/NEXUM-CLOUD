@@ -1,313 +1,172 @@
-import { ArrowDown, ArrowUpRight, Box, Bot, Layers3, Orbit, Sparkles, Workflow, Smartphone, Globe2, Database, Wand2 } from 'lucide-react';
+import { ArrowDown, ArrowUpRight, Bot, Database, Globe2, Layers3, Orbit, Sparkles, Smartphone, Workflow, Zap, Check, Plus } from 'lucide-react';
 import { AnimatePresence, motion, useScroll, useTransform, type Variants } from 'motion/react';
-import { useEffect, useRef, useState } from 'react';
-import RawFlexCarousel from './components/FlexCarousel/FlexCarousel';
-
-const FlexCarousel: any = RawFlexCarousel;
+import { useEffect, useState } from 'react';
 
 const capabilities = [
-  { n:'01', icon:Globe2, title:'Сайты и digital-продукты', text:'Промо-сайты, корпоративные платформы, сервисы и интерфейсы с собственной визуальной системой.' },
-  { n:'02', icon:Smartphone, title:'Мобильные интерфейсы', text:'Адаптивные продукты, сценарии для мобильных устройств и интерфейсы, которые одинаково хорошо работают на любом экране.' },
-  { n:'03', icon:Orbit, title:'3D, WebGL и motion', text:'Интерактивные сцены, realtime-графика, scroll-анимации, микровзаимодействия и визуальные эффекты.' },
-  { n:'04', icon:Bot, title:'AI и интеллектуальные функции', text:'AI-интерфейсы, ассистенты, автоматизация и интеллектуальные сценарии, встроенные в реальный продукт.' },
-  { n:'05', icon:Database, title:'CRM и внутренние системы', text:'Личные кабинеты, CRM, панели управления, базы данных и цифровые рабочие пространства.' },
-  { n:'06', icon:Workflow, title:'Интеграции и автоматизация', text:'Telegram, платежи, API, уведомления, внешние сервисы и бизнес-процессы в единой системе.' },
-  { n:'07', icon:Sparkles, title:'Поддержка и развитие', text:'Техническая поддержка, обновления, аналитика, улучшения и сопровождение после запуска.' },
-  { n:'08', icon:Layers3, title:'Хостинг и инфраструктура', text:'Размещение, SSL, CDN, резервные копии, мониторинг и стабильная работа проекта.' },
-  { n:'09', icon:Globe2, title:'Домен и запуск', text:'Подбор и подключение домена, DNS, почты, SSL и полный запуск проекта в сети.' },
+  { n:'01', icon:Globe2, title:'Сайты и digital-продукты', text:'Имиджевые сайты, сервисы и продуктовые интерфейсы, которые выглядят дорого и ведут пользователя к действию.' },
+  { n:'02', icon:Smartphone, title:'Мобильные интерфейсы', text:'Адаптивные сценарии и мобильные продукты без компромиссов по UX и визуальной системе.' },
+  { n:'03', icon:Bot, title:'AI и автоматизация', text:'AI-функции, ассистенты, Telegram, уведомления и автоматизация реальных бизнес-процессов.' },
+  { n:'04', icon:Database, title:'CRM и внутренние системы', text:'Личные кабинеты, CRM, рабочие пространства, базы данных и понятная бизнес-логика.' },
+  { n:'05', icon:Orbit, title:'3D, WebGL и motion', text:'Интерактивные сцены и motion там, где они усиливают историю продукта, а не превращаются в декорацию.' },
+  { n:'06', icon:Layers3, title:'Инфраструктура и запуск', text:'Домен, DNS, SSL, хостинг, аналитика и поддержка — доводим продукт до работающего состояния.' },
 ];
 
-const showcaseItems = [
-  { src: '/assets/mockups/web-product.svg', alt: 'Мокап сайта и цифрового продукта', title: 'WEB / 01', subtitle: 'Цифровой продукт' },
-  { src: '/assets/mockups/mobile-ui.svg', alt: 'Мокап мобильного интерфейса', title: 'MOBILE / 02', subtitle: 'Интерфейс продукта' },
-  { src: '/assets/mockups/ai-interface.svg', alt: 'Мокап AI интерфейса', title: 'AI / 03', subtitle: 'Интеллектуальный интерфейс' },
-  { src: '/assets/mockups/telegram-bot.svg', alt: 'Мокап Telegram бота', title: 'BOT / 04', subtitle: 'Автоматизация Telegram' },
-  { src: '/assets/mockups/crm-system.svg', alt: 'Мокап CRM системы', title: 'CRM / 05', subtitle: 'Цифровая система' },
-  { src: '/assets/mockups/automation.svg', alt: 'Мокап автоматизации', title: 'AUTOMATION / 06', subtitle: 'Единая экосистема' },
-  { src: '/assets/mockups/support.svg', alt: 'Мокап поддержки цифрового продукта', title: 'SUPPORT / 07', subtitle: 'Поддержка продукта' },
-  { src: '/assets/mockups/hosting.svg', alt: 'Мокап хостинга и инфраструктуры', title: 'HOSTING / 08', subtitle: 'Облачная инфраструктура' },
-  { src: '/assets/mockups/domain.svg', alt: 'Мокап домена и запуска проекта', title: 'DOMAIN / 09', subtitle: 'Запуск и DNS' },
+const showcase = [
+  { src:'/assets/mockups/web-product.svg', tag:'WEB', title:'Цифровой продукт', text:'Сайт с характером, системой и понятным сценарием.' },
+  { src:'/assets/mockups/mobile-ui.svg', tag:'MOBILE', title:'Мобильный интерфейс', text:'Продукт, который одинаково хорошо ощущается на каждом экране.' },
+  { src:'/assets/mockups/ai-interface.svg', tag:'AI', title:'AI-интерфейс', text:'Интеллект становится частью пользовательского опыта.' },
+  { src:'/assets/mockups/crm-system.svg', tag:'CRM', title:'Внутренняя система', text:'Данные, роли и процессы собраны в одном рабочем пространстве.' },
 ];
 
 const projects = [
-  { label:'AI РАЗРАБОТКАER', title:'Nexum.dev', text:'Среда для создания цифровых продуктов с AI.' },
-  { label:'AI-ЯДРО', title:'Nexum Core', text:'Интеллектуальное ядро и инструменты для AI-систем.' },
-  { label:'МАРКЕТПЛЕЙС', title:'Gruzli', text:'Цифровая система для заказчиков, диспетчеров и грузчиков.' },
+  { tag:'AI BUILDER', title:'Nexum.dev', text:'Среда для создания цифровых продуктов с AI.', src:'/assets/mockups/web-product.svg' },
+  { tag:'AI CORE', title:'Nexum Core', text:'Интеллектуальное ядро и инструменты для AI-систем.', src:'/assets/mockups/ai-interface.svg' },
+  { tag:'MARKETPLACE', title:'Gruzli', text:'Цифровая система для заказчиков, диспетчеров и грузчиков.', src:'/assets/mockups/mobile-ui.svg' },
 ];
 
 const process = [
-  ['01','АНАЛИЗ','Разбираем задачу, продукт, аудиторию и точки роста.'],
-  ['02','ДИЗАЙН','Создаём визуальную систему, прототип и интерактивную концепцию.'],
-  ['03','РАЗРАБОТКА','Собираем рабочий продукт, подключаем данные, сервисы и автоматизацию.'],
-  ['04','ЗАПУСК','Проверяем сценарии, оптимизируем и доводим до запуска.'],
+  ['01','Слушаем','Понимаем бизнес, аудиторию и задачу.'],
+  ['02','Проектируем','Находим визуальную идею и пользовательский сценарий.'],
+  ['03','Собираем','Соединяем дизайн, код, данные и интеграции.'],
+  ['04','Запускаем','Проверяем, оптимизируем и передаём работающий продукт.'],
 ];
 
-const heroLabels = [
-  { eyebrow:'ЦИФРОВОЙ ПРОДУКТ', title:'Сайт, который работает на ваш бизнес.', meta:'САЙТ · UX · FRONTEND' },
-  { eyebrow:'ЖИДКИЙ ИНТЕРФЕЙС', title:'Интерфейс, которым хочется пользоваться.', meta:'UI · АНИМАЦИЯ · GLASS' },
-  { eyebrow:'AI-ОПЫТ', title:'AI встроен непосредственно в продукт.', meta:'AI · АВТОМАТИЗАЦИЯ · СИСТЕМЫ' },
-  { eyebrow:'ЕДИНАЯ СИСТЕМА', title:'Все сервисы — в одной цифровой экосистеме.', meta:'CRM · API · TELEGRAM' },
+const directions = [
+  { label:'ПРОДАЖИ', title:'Сделать бренд заметнее', text:'Сильный первый экран, упаковка продукта, доверие и путь к заявке.', accent:'01' },
+  { label:'СИСТЕМА', title:'Собрать процессы в одно место', text:'CRM, личный кабинет, Telegram, платежи, данные и автоматизация.', accent:'02' },
+  { label:'ИННОВАЦИИ', title:'Добавить AI и 3D', text:'Интеллектуальные функции, интерактивные сцены и новый уровень digital-опыта.', accent:'03' },
 ];
 
 const reveal: Variants = {
-  hidden: { opacity: 0, y: 26 },
-  show: { opacity: 1, y: 0, transition: { duration: .7, ease: 'easeOut' } }
+  hidden:{ opacity:0, y:28 },
+  show:{ opacity:1, y:0, transition:{ duration:.7, ease:'easeOut' } }
 };
 
-export default function App() {
-  const heroRef = useRef<HTMLElement>(null);
+export default function App(){
   const { scrollYProgress } = useScroll();
-  const heroY = useTransform(scrollYProgress, [0, .2], [0, -90]);
-  const heroScale = useTransform(scrollYProgress, [0, .2], [1, .95]);
-  const heroOpacity = useTransform(scrollYProgress, [0, .18], [1, .35]);
-  const navBlur = useTransform(scrollYProgress, [0, .08], [0, 1]);
-  const [heroLabel, setHeroLabel] = useState(0);
-  useEffect(() => {
-    const timer = window.setInterval(() => setHeroLabel((value) => (value + 1) % heroLabels.length), 3200);
-    return () => window.clearInterval(timer);
-  }, []);
+  const heroY = useTransform(scrollYProgress,[0,.2],[0,-80]);
+  const heroOpacity = useTransform(scrollYProgress,[0,.18],[1,.2]);
+  const [heroIndex,setHeroIndex] = useState(0);
+  const [direction,setDirection] = useState(0);
+
+  useEffect(()=>{
+    const timer = window.setInterval(()=>setHeroIndex(v=>(v+1)%4),3600);
+    return ()=>window.clearInterval(timer);
+  },[]);
+
+  const heroWords = ['WEB','AI','3D','SYSTEM'];
+  const activeDirection = directions[direction];
 
   return <main>
-    <motion.div className="scroll-progress" style={{ scaleX: scrollYProgress }} />
+    <motion.div className="scroll-progress" style={{scaleX:scrollYProgress}} />
 
-    <motion.nav className="nav" style={{ opacity: useTransform(navBlur, [0,1], [.98, .9]) }}>
+    <nav className="nav">
       <a className="brand" href="#"><span className="brand-mark">N</span><span>NEXUM CLOUD</span></a>
       <div className="nav-links">
-        <a href="#about">Студия</a><a href="#capabilities">Услуги</a><a href="#showcase">Продукты</a><a href="#projects">Проекты</a>
+        <a href="#about">Студия</a><a href="#showcase">Витрина</a><a href="#services">Услуги</a><a href="#projects">Проекты</a>
       </div>
-      <a className="nav-cta glass-button" href="#contact">Обсудить проект <ArrowUpRight size={16}/></a>
-    </motion.nav>
+      <a className="nav-cta glass-button" href="#contact">Обсудить проект <ArrowUpRight size={15}/></a>
+    </nav>
 
-    <section className="hero" ref={heroRef}>
-      <motion.div className="hero-copy" style={{ y: heroY, opacity: heroOpacity }}>
-        <motion.div initial="hidden" animate="show" variants={reveal}><p className="eyebrow">NEXUM CLOUD · ЦИФРОВАЯ СТУДИЯ</p></motion.div>
-        <motion.div className="nexum-brand-hero" initial="hidden" animate="show" variants={reveal}>
-          <div className="nexum-logo-mark"><span>N</span><i/><b/></div>
-          <div className="nexum-brand-wordmark">
-            <span>NEXUM</span><strong>CLOUD</strong>
-          </div>
+    <section className="hero hero-v2">
+      <motion.div className="hero-copy" style={{y:heroY,opacity:heroOpacity}}>
+        <motion.div initial="hidden" animate="show" variants={reveal}>
+          <p className="eyebrow">NEXUM CLOUD · DIGITAL STUDIO / 2026</p>
+          <h1>Продукты,<br/><em>которые хочется открыть.</em></h1>
+          <p className="hero-lead">Создаём цифровые продукты, где визуальная идея, технология и бизнес-логика работают как одно целое.</p>
         </motion.div>
-        <motion.div className="hero-title-block" initial="hidden" animate="show" variants={reveal} transition={{ delay: .08 }}>
-          <h1>Цифровые системы<br/><em>с человеческим подходом.</em></h1>
-          <p>Создаём сайты, цифровые продукты и интеллектуальные системы, объединяя дизайн, технологии и автоматизацию в одну среду.</p>
-        </motion.div>
-        <motion.div className="hero-info-grid" initial="hidden" animate="show" variants={reveal} transition={{ delay: .16 }}>
-          <div><span>01</span><b>ДИЗАЙН</b><small>UI / UX · БРЕНД</small></div>
-          <div><span>02</span><b>РАЗРАБОТКА</b><small>САЙТЫ · МОБИЛЬНЫЕ · 3D</small></div>
-          <div><span>03</span><b>ИНТЕЛЛЕКТ</b><small>AI · АВТОМАТИЗАЦИЯ</small></div>
-        </motion.div>
-        <motion.div className="hero-actions" initial="hidden" animate="show" variants={reveal} transition={{ delay: .24 }}>
-          <a className="primary glass-button" href="#showcase">Посмотреть возможности <ArrowDown size={17}/></a>
-          <a className="secondary glass-button" href="#contact">Начать проект</a>
-        </motion.div>
-        <motion.div className="hero-proof" initial="hidden" animate="show" variants={reveal} transition={{ delay: .32 }}>
-          <span><b>WEB</b> / САЙТЫ</span><span><b>AI</b> / СИСТЕМЫ</span><span><b>3D</b> / АНИМАЦИЯ</span>
-        </motion.div>
+        <div className="hero-v2-actions">
+          <a className="primary glass-button" href="#showcase">Смотреть работы <ArrowDown size={16}/></a>
+          <a className="secondary glass-button" href="#contact">Рассказать о задаче</a>
+        </div>
+        <div className="hero-signal">
+          <span>01</span><i/><span>DESIGN</span><i/><span>TECH</span><i/><span>INTELLIGENCE</span>
+        </div>
       </motion.div>
 
-      <motion.div className="hero-visual hero-product glass-panel" style={{ scale: heroScale }}>
-        <div className="scene-caption"><span>NEXUM / ЦИФРОВОЙ ПРОДУКТ</span><span>0{heroLabel + 1} / 04</span></div>
-        <div className="scene-chip glass-button"><span className="status-dot"/> ОНЛАЙН / ПРЕДПРОСМОТР</div>
-        <div className="hero-product-glow" />
-        <div className="website-mockup">
-          <div className="mock-browser-bar">
-            <span className="browser-dots"><i/><i/><i/></span>
-            <span>nexum.cloud</span>
-            <span className="browser-status">LIVE</span>
-          </div>
-          <img src="/assets/mockups/web-product.svg" alt="Пример дизайна цифрового продукта Nexum Cloud" />
-          <div className="mockup-reflection" />
+      <motion.div className="hero-v2-stage glass-panel" initial={{opacity:0,scale:.96}} animate={{opacity:1,scale:1}} transition={{duration:1,delay:.15}}>
+        <div className="stage-top"><span>NEXUM / LIVE EXPERIENCE</span><span>0{heroIndex+1} / 04</span></div>
+        <div className="stage-orbit orbit-one"/><div className="stage-orbit orbit-two"/>
+        <div className="stage-core">
+          <div className="stage-core-inner"><span>N</span><small>NX</small></div>
         </div>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={heroLabel}
-            className="hero-changing-copy"
-            initial={{ opacity: 0, y: 18, filter: 'blur(8px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            exit={{ opacity: 0, y: -14, filter: 'blur(8px)' }}
-            transition={{ duration: .55, ease: 'easeOut' }}
-          >
-            <span>{heroLabels[heroLabel].eyebrow}</span>
-            <strong>{heroLabels[heroLabel].title}</strong>
-            <small>{heroLabels[heroLabel].meta}</small>
-          </motion.div>
-        </AnimatePresence>
-        <div className="hero-glass-orb" />
-        <div className="hero-orbit-label glass-button"><Wand2 size={14}/> LIQUID GLASS</div>
-        <div className="visual-label"><span>ИНТЕРАКТИВНЫЙ ПРОДУКТ</span><span>АВТОПРОСМОТР / 04</span></div>
+        <div className="stage-word"><AnimatePresence mode="wait"><motion.span key={heroWords[heroIndex]} initial={{opacity:0,y:20,filter:'blur(8px)'}} animate={{opacity:1,y:0,filter:'blur(0)'}} exit={{opacity:0,y:-20,filter:'blur(8px)'}}>{heroWords[heroIndex]}</motion.span></AnimatePresence></div>
+        <div className="stage-caption"><b>Цифровая среда</b><span>WEB · AI · 3D · AUTOMATION</span></div>
+        <div className="stage-float float-a glass-button"><span className="status-dot"/> LIVE SYSTEM</div>
+        <div className="stage-float float-b glass-button">SCROLL / EXPLORE <ArrowDown size={13}/></div>
       </motion.div>
     </section>
 
-    <section className="impact-layer" aria-label="Nexum Cloud capabilities">
-      <div className="impact-top">
-        <span>DESIGN SYSTEM / 2026</span>
-        <span>SCROLL TO EXPLORE</span>
+    <section className="signal-strip">
+      <div><span>01</span><b>ВИЗУАЛ</b><small>Сильная идея с первого экрана</small></div>
+      <div><span>02</span><b>СИСТЕМА</b><small>Не только красиво — всё работает</small></div>
+      <div><span>03</span><b>ЭМОЦИЯ</b><small>Опыт, который запоминается</small></div>
+      <div><span>04</span><b>РЕЗУЛЬТАТ</b><small>Сценарий ведёт к действию</small></div>
+    </section>
+
+    <section id="about" className="about-v2">
+      <div className="editorial-kicker"><span>NEXUM CLOUD / 01</span><span>ABOUT THE STUDIO</span></div>
+      <div className="about-v2-grid">
+        <div><p className="eyebrow">НЕ ПРОСТО САЙТ</p><h2>Мы собираем<br/><em>цифровые впечатления.</em></h2></div>
+        <div className="about-v2-copy"><p>Сначала человек видит дизайн. Затем чувствует продукт. А дальше должна работать система.</p><p>Поэтому мы объединяем UX, frontend, AI, данные, интеграции и автоматизацию в одну цифровую среду.</p><div className="about-metrics"><b>WEB</b><b>AI</b><b>3D</b><b>OPS</b></div></div>
       </div>
-      <div className="impact-intro">
-        <p className="eyebrow">НЕ ПРОСТО САЙТ</p>
-        <h2>Создаём впечатление,<br/><em>которое превращается в действие.</em></h2>
-      </div>
-      <div className="impact-grid">
-        <article className="impact-card impact-card-main">
-          <div className="impact-card-glow" />
-          <div className="impact-card-orbit" />
-          <div className="impact-card-copy">
-            <span>01 / EXPERIENCE</span>
-            <strong>Первый экран<br/>продаёт идею.</strong>
-            <p>Сильная композиция, движение и продуктовый сценарий вместо обычного шаблона.</p>
-          </div>
-          <div className="impact-ui">
-            <span className="impact-ui-dot" />
-            <span>LIVE EXPERIENCE</span>
-            <i />
-          </div>
-        </article>
-        <article className="impact-card">
-          <div className="impact-mini-number">02</div>
-          <div className="impact-lines"><i/><i/><i/><i/></div>
-          <div className="impact-card-copy">
-            <span>02 / SYSTEM</span>
-            <strong>Красивый интерфейс<br/>+ реальная логика.</strong>
-            <p>CRM, AI, Telegram, платежи, данные и автоматизация соединяются в одной системе.</p>
-          </div>
-        </article>
-        <article className="impact-card impact-card-dark">
-          <div className="impact-mini-label">NEXUM / MOTION</div>
-          <div className="impact-word">MOVE<span>.</span></div>
-          <div className="impact-card-copy">
-            <span>03 / MOTION</span>
-            <strong>Каждое движение<br/>имеет смысл.</strong>
-            <p>Микроанимации и 3D направляют внимание, а не мешают пользоваться сайтом.</p>
-          </div>
-        </article>
-      </div>
-      <div className="impact-marquee" aria-hidden="true">
-        <span>WEB</span><b>✦</b><span>AI</span><b>✦</b><span>3D</span><b>✦</b><span>CRM</span><b>✦</b><span>AUTOMATION</span><b>✦</b><span>WEB</span><b>✦</b><span>AI</span><b>✦</b><span>3D</span>
+      <div className="about-feature">
+        <div className="feature-number">01</div>
+        <div className="feature-copy"><span>OUR PRINCIPLE</span><strong>Каждый экран<br/>должен иметь причину.</strong><p>Мы не добавляем эффект ради эффекта. Движение, стекло, 3D и интерактивность работают на восприятие, доверие и действие.</p></div>
+        <div className="feature-diagram"><div className="diagram-ring r1"/><div className="diagram-ring r2"/><div className="diagram-dot d1"/><div className="diagram-dot d2"/><div className="diagram-line"/></div>
       </div>
     </section>
 
-    <section id="about" className="about">
-      <div className="about-topline">
-        <p className="eyebrow">NEXUM CLOUD / 01</p>
-        <span>DESIGN · TECHNOLOGY · INTELLIGENCE</span>
-      </div>
-      <div className="about-hero">
-        <div className="about-title">
-          <h2>Мы собираем<br/><em>цифровые продукты.</em></h2>
-        </div>
-        <div className="about-description">
-          <p>От первого экрана до работающей системы — дизайн, разработка, AI, данные и автоматизация соединяются в одном продукте.</p>
-          <div className="about-meta"><span>WEB</span><span>AI</span><span>3D</span><span>CRM</span><span>OPS</span></div>
-        </div>
-      </div>
-      <div className="about-carousel-wrap">
-        <div className="about-carousel-head">
-          <span>PRODUCT SYSTEM / 01—06</span>
-          <span>DRAG · SCROLL · EXPLORE</span>
-        </div>
-        <div className="about-carousel glass-panel">
-          <div className="about-native-carousel">
-            <button className="about-carousel-control prev" type="button" aria-label="Предыдущий мокап"
-              onClick={() => {
-                const track = document.querySelector('.about-native-track') as HTMLElement | null;
-                track?.scrollBy({ left: -(track.clientWidth * 0.78), behavior: 'smooth' });
-              }}>‹</button>
-            <div className="about-native-track">
-              {showcaseItems.slice(0, 6).map((item, index) => (
-                <article className="about-native-card" key={item.src}>
-                  <div className="about-native-image">
-                    <img src={item.src} alt={item.alt} loading={index === 0 ? 'eager' : 'lazy'} />
-                  </div>
-                  <div className="about-native-caption">
-                    <span>{item.title}</span>
-                    <small>{item.subtitle}</small>
-                  </div>
-                </article>
-              ))}
-            </div>
-            <button className="about-carousel-control next" type="button" aria-label="Следующий мокап"
-              onClick={() => {
-                const track = document.querySelector('.about-native-track') as HTMLElement | null;
-                track?.scrollBy({ left: track.clientWidth * 0.78, behavior: 'smooth' });
-              }}>›</button>
-          </div>
-        </div>
-      </div>
-      <div className="about-bottom">
-        <div className="about-number">01—04</div>
-        <p>Не собираем сайт отдельно, CRM отдельно и AI отдельно. Проектируем единую цифровую среду, где интерфейс, данные и бизнес-логика работают вместе.</p>
-        <div className="about-stats">
-          <div><strong>WEB</strong><span>сайты и сервисы</span></div>
-          <div><strong>AI</strong><span>умные функции</span></div>
-          <div><strong>3D</strong><span>визуализация</span></div>
-          <div><strong>OPS</strong><span>автоматизация</span></div>
-        </div>
+    <section id="showcase" className="showcase-v2">
+      <div className="section-head-v2"><div><p className="eyebrow">02 / PRODUCT SHOWCASE</p><h2>Посмотрите,<br/><em>как это ощущается.</em></h2></div><p>Не набор шаблонов. Каждый проект получает собственную визуальную систему, ритм и характер.</p></div>
+      <div className="showcase-stack">
+        {showcase.map((item,i)=><motion.article className={'showcase-card showcase-'+i} key={item.src} initial="hidden" whileInView="show" viewport={{once:true,amount:.2}} variants={reveal}>
+          <div className="showcase-visual"><img src={item.src} alt={item.title}/><div className="showcase-sheen"/></div>
+          <div className="showcase-info"><span>{item.tag} / 0{i+1}</span><h3>{item.title}</h3><p>{item.text}</p><ArrowUpRight size={18}/></div>
+        </motion.article>)}
       </div>
     </section>
 
-    <section id="showcase" className="mockup-showcase">
-      <div className="section-head compact">
-        <div><p className="eyebrow">ЖИДКОЕ СТЕКЛО / ВИТРИНА / 02</p><h2>Сайт. Приложение. Бот.<br/><span>Всё в одной системе.</span></h2></div>
-        <p className="section-note">От сайта и мобильного интерфейса до Telegram-бота, поддержки, хостинга и домена — создаём не отдельные экраны, а полноценный цифровой продукт.</p>
+    <section id="services" className="services-v2">
+      <div className="section-head-v2"><div><p className="eyebrow">03 / CAPABILITIES</p><h2>Всё необходимое<br/><em>в одном месте.</em></h2></div><p>От первого пикселя до инфраструктуры. Можно взять отдельный слой или собрать полноценную систему.</p></div>
+      <div className="services-v2-grid">{capabilities.map(({n,title,text,icon:Icon},i)=><motion.article className="service-v2" key={n} initial="hidden" whileInView="show" viewport={{once:true,amount:.12}} variants={reveal} transition={{delay:i*.05}}>
+        <div className="service-v2-top"><span>{n}</span><Icon size={21} strokeWidth={1.5}/></div><h3>{title}</h3><p>{text}</p><span className="service-v2-arrow"><ArrowUpRight size={17}/></span>
+      </motion.article>)}</div>
+    </section>
+
+    <section className="direction-v2">
+      <div className="section-head-v2"><div><p className="eyebrow">04 / FIND YOUR DIRECTION</p><h2>Что сейчас<br/><em>важнее всего?</em></h2></div><p>Выберите направление — покажем, как может выглядеть следующий шаг.</p></div>
+      <div className="direction-layout">
+        <div className="direction-tabs">{directions.map((item,i)=><button key={item.label} className={i===direction?'active':''} onClick={()=>setDirection(i)}><span>{item.accent}</span><b>{item.label}</b><ArrowUpRight size={16}/></button>)}</div>
+        <AnimatePresence mode="wait"><motion.div key={direction} className="direction-result" initial={{opacity:0,x:20}} animate={{opacity:1,x:0}} exit={{opacity:0,x:-20}} transition={{duration:.35}}>
+          <span>{activeDirection.label} / 0{direction+1}</span><h3>{activeDirection.title}</h3><p>{activeDirection.text}</p><a href="#contact">Обсудить сценарий <ArrowUpRight size={16}/></a>
+        </motion.div></AnimatePresence>
       </div>
-      <div className="hero-carousel glass-panel">
-        <FlexCarousel items={showcaseItems} preset="liquid" intro="rise" cardHeight={0.58} gap={14} radius={20} squeeze={0.2} focusOnClick captions captureWheel />
-      </div>
     </section>
 
-    <motion.section className="manifesto" initial="hidden" whileInView="show" viewport={{ once:true, amount:.25 }} variants={reveal}>
-      <p className="eyebrow">ПОДХОД NEXUM / 03</p>
-      <h2>Красивый интерфейс —<br/><span>только первый слой.</span></h2>
-      <p>За ним должна работать система: данные, интеграции, логика, AI и понятный пользовательский сценарий. Поэтому мы проектируем не страницу, а целостный цифровой продукт.</p>
-    </motion.section>
-
-    <section id="capabilities" className="capabilities">
-      <div className="section-head"><p className="eyebrow">УСЛУГИ / 04</p><h2>Что мы<br/><span>умеем делать.</span></h2></div>
-      <div className="services">{capabilities.map(({n,title,text,icon:Icon}, i)=>
-        <motion.article className="service glass-card" key={n} initial="hidden" whileInView="show" viewport={{ once:true, amount:.18 }} variants={reveal} transition={{ delay:i*.06 }}>
-          <div className="service-top"><span>{n}</span><Icon size={23} strokeWidth={1.5}/></div>
-          <h3>{title}</h3><p>{text}</p><span className="service-arrow glass-button"><ArrowUpRight size={19}/></span>
-        </motion.article>
-      )}</div>
+    <section className="process-v2">
+      <div className="process-v2-head"><p className="eyebrow">05 / PROCESS</p><h2>От идеи<br/><em>до работающего продукта.</em></h2></div>
+      <div className="process-v2-list">{process.map(([n,title,text],i)=><motion.div className="process-v2-row" key={n} initial="hidden" whileInView="show" viewport={{once:true,amount:.3}} variants={reveal}><span>{n}</span><b>{title}</b><p>{text}</p><div className="process-check"><Check size={14}/></div></motion.div>)}</div>
     </section>
 
-    <section className="process">
-      <div className="section-head"><p className="eyebrow">КАК МЫ РАБОТАЕМ / 05</p><h2>От задачи<br/><span>до запуска.</span></h2></div>
-      <div className="process-grid">{process.map(([n,title,text]) =>
-        <motion.div className="process-card glass-card" key={n} initial="hidden" whileInView="show" viewport={{ once:true, amount:.25 }} variants={reveal}>
-          <span>{n}</span><h3>{title}</h3><p>{text}</p>
-        </motion.div>
-      )}</div>
+    <section className="lab-v2">
+      <div className="lab-v2-bg"><div className="lab-grid"/><div className="lab-sphere"/><div className="lab-cursor"/></div>
+      <div className="lab-v2-copy"><p className="eyebrow">06 / NEXUM LAB</p><h2>Когда обычного<br/>экрана <em>мало.</em></h2><p>3D, WebGL, motion и интерактивные сцены превращают сайт в опыт. Используем их только там, где они усиливают историю.</p><div><span>THREE.JS</span><span>WEBGL</span><span>MOTION</span><span>SHADERS</span></div></div>
+      <div className="lab-v2-console"><span><i/> REALTIME</span><b>01</b><small>INTERACTIVE EXPERIENCE</small></div>
     </section>
 
-    <section className="lab">
-      <div className="lab-orbit"><div className="lab-dot dot-a"/><div className="lab-dot dot-b"/><div className="lab-ring ring-a"/><div className="lab-ring ring-b"/></div>
-      <motion.div className="lab-copy" initial="hidden" whileInView="show" viewport={{ once:true, amount:.3 }} variants={reveal}>
-        <p className="eyebrow">ИНТЕРАКТИВНАЯ ЛАБОРАТОРИЯ / 06</p><h2>Плоский экран —<br/><span>только начало.</span></h2>
-        <p>Подключаем 3D, физику, шейдеры, частицы, устройства и анимации при прокрутке там, где это усиливает продукт.</p>
-        <div className="lab-tags"><span>THREE.JS</span><span>WEBGL</span><span>GSAP</span><span>GLTF</span></div>
-      </motion.div>
-      <div className="lab-glass-panel glass-panel"><span className="status-dot"/> СИСТЕМА РЕАЛЬНОГО ВРЕМЕНИ<div className="lab-bars"><i/><i/><i/><i/><i/></div></div>
+    <section id="projects" className="projects-v2">
+      <div className="section-head-v2"><div><p className="eyebrow">07 / SELECTED WORK</p><h2>То, что мы<br/><em>строим сами.</em></h2></div><p>Nexum — не только студия. Мы постоянно создаём собственные продукты и проверяем технологии на себе.</p></div>
+      <div className="projects-v2-grid">{projects.map((p,i)=><a className="project-v2" href="#contact" key={p.title}><div className="project-v2-art"><img src={p.src} alt={p.title}/><span>{p.tag}</span></div><div className="project-v2-info"><div><small>0{i+1}</small><h3>{p.title}</h3><p>{p.text}</p></div><ArrowUpRight size={20}/></div></a>)}</div>
     </section>
 
-    <section id="projects" className="projects">
-      <div className="section-head"><p className="eyebrow">ИЗБРАННЫЕ ПРОЕКТЫ / 07</p><h2>Продукты<br/><span>в экосистеме Nexum.</span></h2></div>
-      <div className="project-grid">{projects.map((p,i)=>
-        <motion.a className="project-card glass-card" href="#contact" key={p.title} initial="hidden" whileInView="show" viewport={{ once:true, amount:.2 }} variants={reveal}>
-          <div className={'project-art art-'+i}><div className="project-orb"/><span className="project-float glass-button">{p.label}</span></div>
-          <div className="project-info"><span>{p.label}</span><h3>{p.title}</h3><p>{p.text}</p><ArrowUpRight size={18}/></div>
-        </motion.a>
-      )}</div>
+    <section className="closing-v2">
+      <div className="closing-mark"><Zap size={18}/></div><p className="eyebrow">08 / THE LAST SCREEN</p><h2>Хороший digital<br/><em>не заканчивается кнопкой.</em></h2><p>Он остаётся в памяти, помогает бизнесу и даёт человеку понятную причину сделать следующий шаг.</p>
     </section>
 
-    <motion.section className="statement" initial="hidden" whileInView="show" viewport={{ once:true, amount:.3 }} variants={reveal}>
-      <span className="eyebrow">NEXUM CLOUD / 08</span>
-      <h2>Не продаём<br/><span>набор услуг.</span><br/>Создаём цифровую среду.</h2>
-    </motion.section>
-
-    <footer id="contact">
-      <div><span className="eyebrow">НАЧАТЬ ПРОЕКТ / 09</span><h2>Есть задача?<br/>Покажем, что можно сделать.</h2><p>Сайт, продукт, интерфейс, AI-система или автоматизация.</p></div>
-      <a className="primary glass-button" href="mailto:hello@nexum.cloud">Обсудить проект <ArrowUpRight size={18}/></a>
+    <footer id="contact" className="footer-v2">
+      <div className="footer-v2-main"><p className="eyebrow">09 / START A PROJECT</p><h2>Расскажите,<br/><em>что хотите изменить.</em></h2><p>Сайт, цифровой продукт, AI, CRM или новая digital-система.</p></div>
+      <div className="footer-v2-action"><a className="footer-big-cta" href="mailto:hello@nexum.cloud">Начать разговор <ArrowUpRight size={22}/></a><div className="footer-mini"><span>HELLO@NEXUM.CLOUD</span><span>© 2026 NEXUM CLOUD</span></div></div>
     </footer>
-  </main>
+  </main>;
 }
