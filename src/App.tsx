@@ -23,7 +23,6 @@ const marketProducts = [
   {slug:'hosting',tag:'HOSTING',title:'Хостинг и запуск',text:'Разворачиваем проект, подключаем домен, SSL, DNS и базовую инфраструктуру.',src:'/assets/mockups/hosting.svg',price:'от 7 000 ₽',features:['Деплой','Домен и DNS','SSL','Базовый мониторинг']},
   {slug:'domain',tag:'DOMAIN',title:'Домен и настройка',text:'Помогаем выбрать, зарегистрировать и корректно настроить домен проекта.',src:'/assets/mockups/domain.svg',price:'от 3 000 ₽',features:['Подбор домена','DNS','SSL','Почта проекта']},
 ];
-];
 
 const showcase = [
   { src:'/assets/mockups/web-product.svg', tag:'WEB', title:'Цифровой продукт', text:'Сайт с характером, системой и понятным сценарием.' },
