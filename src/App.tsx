@@ -4,7 +4,7 @@ import { HeroScene } from './components/HeroScene';
 import RawFlexCarousel from './components/FlexCarousel/FlexCarousel';
 
 // The React Bits component is intentionally kept in its JS variant; cast the imported JS component at the integration boundary.
-const FlexCarousel = RawFlexCarousel as any;
+const FlexCarousel: any = RawFlexCarousel;
 
 const capabilities = [
   { n:'01', icon:Box, title:'Web & digital products', text:'Сайты, сервисы и интерфейсы, которые ощущаются как полноценный продукт.' },
