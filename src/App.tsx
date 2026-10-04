@@ -16,12 +16,12 @@ const capabilities = [
 ];
 
 const showcaseItems = [
-  { src: 'https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?w=1400&q=85&auto=format&fit=crop', alt: 'Abstract chrome sculpture', title: 'WebGL / 01', subtitle: 'Realtime object' },
-  { src: 'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?w=1400&q=85&auto=format&fit=crop', alt: 'Liquid glass abstract form', title: 'Motion / 02', subtitle: 'Liquid interface' },
-  { src: 'https://images.unsplash.com/photo-1633412802994-5c058f151b66?w=1400&q=85&auto=format&fit=crop', alt: 'Futuristic digital form', title: '3D / 03', subtitle: 'Spatial experience' },
-  { src: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=1400&q=85&auto=format&fit=crop', alt: 'Geometric light composition', title: 'AI / 04', subtitle: 'Intelligent product' },
-  { src: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1400&q=85&auto=format&fit=crop', alt: 'Retro computer interface', title: 'UI / 05', subtitle: 'Product interface' },
-  { src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400&q=85&auto=format&fit=crop', alt: 'Digital analytics interface', title: 'Systems / 06', subtitle: 'Digital ecosystem' }
+  { src: '/assets/mockups/web-product.svg', alt: 'Макет цифрового продукта Nexum Cloud', title: 'WEB / 01', subtitle: 'Digital product' },
+  { src: '/assets/mockups/mobile-ui.svg', alt: 'Мокап мобильного интерфейса Nexum', title: 'MOBILE / 02', subtitle: 'Product UI' },
+  { src: '/assets/mockups/ai-interface.svg', alt: 'Мокап AI-интерфейса Nexum', title: 'AI / 03', subtitle: 'Intelligent interface' },
+  { src: '/assets/mockups/telegram-bot.svg', alt: 'Мокап Telegram-бота Nexum', title: 'BOT / 04', subtitle: 'Telegram automation' },
+  { src: '/assets/mockups/crm-system.svg', alt: 'Мокап CRM и внутренней системы', title: 'CRM / 05', subtitle: 'Digital system' },
+  { src: '/assets/mockups/automation.svg', alt: 'Мокап системы автоматизации', title: 'AUTOMATION / 06', subtitle: 'Connected ecosystem' }
 ];
 
 const projects = [
