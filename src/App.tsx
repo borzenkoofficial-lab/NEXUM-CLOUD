@@ -48,6 +48,7 @@ export default function App(){
   const heroOpacity = useTransform(scrollYProgress,[0,.18],[1,.2]);
   const [heroIndex,setHeroIndex] = useState(0);
   const [direction,setDirection] = useState(0);
+  const [showcaseActive,setShowcaseActive] = useState(0);
 
   useEffect(()=>{
     const timer = window.setInterval(()=>setHeroIndex(v=>(v+1)%4),3600);
@@ -117,13 +118,20 @@ export default function App(){
       </div>
     </section>
 
-    <section id="showcase" className="showcase-v2">
-      <div className="section-head-v2"><div><p className="eyebrow">02 / PRODUCT SHOWCASE</p><h2>Посмотрите,<br/><em>как это ощущается.</em></h2></div><p>Не набор шаблонов. Каждый проект получает собственную визуальную систему, ритм и характер.</p></div>
-      <div className="showcase-stack">
-        {showcase.map((item,i)=><motion.article className={'showcase-card showcase-'+i} key={item.src} initial="hidden" whileInView="show" viewport={{once:true,amount:.2}} variants={reveal}>
-          <div className="showcase-visual"><img src={item.src} alt={item.title}/><div className="showcase-sheen"/></div>
-          <div className="showcase-info"><span>{item.tag} / 0{i+1}</span><h3>{item.title}</h3><p>{item.text}</p><ArrowUpRight size={18}/></div>
-        </motion.article>)}
+    <section id="showcase" className="showcase-v2 showcase-experience">
+      <div className="section-head-v2"><div><p className="eyebrow">02 / PRODUCT SHOWCASE</p><h2>Посмотрите,<br/><em>как это ощущается.</em></h2></div><p>Наведите курсор, выберите систему и почувствуйте разницу. Здесь интерфейс не лежит картинкой — он живёт внутри пространства.</p></div>
+      <div className="showcase-stage">
+        <div className="showcase-glow"/>
+        <motion.div className="showcase-device" key={showcaseActive} initial={{opacity:0,scale:.94,y:18,rotateX:5}} animate={{opacity:1,scale:1,y:0,rotateX:0}} transition={{duration:.65,ease:[.22,1,.36,1]}}>
+          <div className="device-top"><span className="device-dots"><i/><i/><i/></span><span>{showcase[showcaseActive].tag} / NEXUM</span><span>● LIVE</span></div>
+          <div className="device-screen"><img src={showcase[showcaseActive].src} alt={showcase[showcaseActive].title}/><div className="device-sheen"/></div>
+          <div className="device-base"><span>{showcase[showcaseActive].title}</span><small>{showcase[showcaseActive].text}</small></div>
+        </motion.div>
+        {showcase.map((item,i)=><motion.button key={item.src} className={'showcase-widget widget-'+i+(i===showcaseActive?' active':'')} onClick={()=>setShowcaseActive(i)} whileHover={{y:-8,scale:1.035}} whileTap={{scale:.97}} animate={{y:i===showcaseActive?-5:0}} transition={{duration:.35}}>
+          <span className="widget-icon">{['WEB','M','AI','CRM'][i]}</span>
+          <span><b>{item.title}</b><small>{item.tag}</small></span><ArrowUpRight size={14}/>
+        </motion.button>)}
+        <div className="showcase-hint"><span>01—04</span><i/><span>Наведите · выберите · исследуйте</span></div>
       </div>
     </section>
 
