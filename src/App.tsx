@@ -201,7 +201,6 @@ function ProductPage({product}:{product:typeof marketProducts[number]}){
 }
 
 export default function App(){
-  <NexumWelcome />
   const { scrollYProgress } = useScroll();
   const heroY = useTransform(scrollYProgress,[0,.2],[0,-80]);
   const heroOpacity = useTransform(scrollYProgress,[0,.18],[1,.2]);
@@ -222,6 +221,7 @@ export default function App(){
   if(product) return <ProductPage product={product} />;
 
   return <main>
+    <NexumWelcome />
     <motion.div className="scroll-progress" style={{scaleX:scrollYProgress}} />
 
     <nav className="nav">
