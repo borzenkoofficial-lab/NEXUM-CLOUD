@@ -328,3 +328,44 @@ body:after{content:'';position:fixed;z-index:-1;inset:0;pointer-events:none;back
   .about-carousel-control{width:40px;height:40px;font-size:25px}
   .about-carousel-control.prev{left:10px}.about-carousel-control.next{right:10px}
 }
+
+/* PREMIUM IMPACT LAYER */
+.impact-layer{position:relative;padding:112px 8vw 96px;overflow:hidden;background:linear-gradient(180deg,#f7f9fc 0%,#edf3fb 52%,#f7f8fb 100%);border-top:1px solid rgba(255,255,255,.9);border-bottom:1px solid var(--line)}
+.impact-layer:before{content:'';position:absolute;width:620px;height:620px;right:-180px;top:40px;border-radius:50%;background:radial-gradient(circle,rgba(126,154,255,.22),rgba(196,170,255,.10) 38%,transparent 70%);filter:blur(16px);pointer-events:none}
+.impact-top{position:relative;z-index:1;display:flex;justify-content:space-between;color:#8a94a3;font-size:9px;letter-spacing:.16em;margin-bottom:52px}
+.impact-intro{position:relative;z-index:1;max-width:1050px;margin-bottom:58px}
+.impact-intro h2{font:600 clamp(48px,6.4vw,96px)/.92 Manrope;letter-spacing:-.075em;margin:14px 0 0;color:#202733}
+.impact-intro h2 em{font-style:normal;color:#929baa}
+.impact-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.35fr 1fr 1fr;gap:14px;min-height:540px}
+.impact-card{position:relative;min-height:540px;overflow:hidden;padding:30px;border-radius:30px;border:1px solid rgba(255,255,255,.9);background:linear-gradient(145deg,rgba(255,255,255,.82),rgba(223,235,250,.58));box-shadow:inset 0 1px rgba(255,255,255,.98),0 28px 80px rgba(68,88,125,.10);transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s ease}
+.impact-card:hover{transform:translateY(-8px);box-shadow:inset 0 1px rgba(255,255,255,1),0 38px 90px rgba(68,88,125,.17)}
+.impact-card-main{background:linear-gradient(145deg,#eef4ff 0%,#dbe7ff 42%,#f0e6ff 100%)}
+.impact-card-glow{position:absolute;width:430px;height:430px;right:-130px;top:-100px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.95),rgba(127,158,255,.32) 34%,transparent 70%);filter:blur(5px);animation:impactFloat 7s ease-in-out infinite}
+.impact-card-orbit{position:absolute;width:280px;height:280px;right:12%;top:15%;border:1px solid rgba(255,255,255,.78);border-radius:50%;transform:rotate(-20deg);box-shadow:0 0 50px rgba(111,130,235,.15)}
+.impact-card-orbit:before,.impact-card-orbit:after{content:'';position:absolute;border-radius:50%;background:#fff;box-shadow:0 0 24px rgba(113,142,255,.7)}
+.impact-card-orbit:before{width:10px;height:10px;left:30px;top:36px}.impact-card-orbit:after{width:6px;height:6px;right:32px;bottom:50px}
+.impact-card-copy{position:absolute;left:30px;right:30px;bottom:30px;z-index:2}
+.impact-card-copy span{display:block;font-size:8px;letter-spacing:.16em;color:#788497;margin-bottom:13px}
+.impact-card-copy strong{display:block;font:600 clamp(25px,2.2vw,38px)/.98 Manrope;letter-spacing:-.055em;color:#202733}
+.impact-card-copy p{max-width:370px;margin:16px 0 0;color:#667184;font-size:13px;line-height:1.55}
+.impact-ui{position:absolute;left:30px;top:30px;display:flex;align-items:center;gap:8px;padding:9px 12px;border:1px solid rgba(255,255,255,.9);border-radius:999px;background:rgba(255,255,255,.48);backdrop-filter:blur(14px);font-size:8px;letter-spacing:.12em;color:#5f6a7c}
+.impact-ui-dot{width:6px;height:6px;border-radius:50%;background:#55c889;box-shadow:0 0 12px rgba(85,200,137,.7)}
+.impact-ui i{display:block;width:28px;height:1px;background:#a6b0c0}
+.impact-mini-number{position:absolute;top:30px;right:30px;font:500 44px/1 Manrope;letter-spacing:-.08em;color:#b2bac6}
+.impact-lines{position:absolute;left:30px;right:30px;top:105px;height:175px;display:flex;align-items:center;gap:10px}
+.impact-lines i{display:block;flex:1;height:100%;border-radius:999px;background:linear-gradient(180deg,rgba(75,110,220,.05),rgba(87,112,200,.28),rgba(183,160,255,.08));transform-origin:center;animation:linePulse 3.2s ease-in-out infinite}
+.impact-lines i:nth-child(2){height:72%;animation-delay:-.7s}.impact-lines i:nth-child(3){height:92%;animation-delay:-1.3s}.impact-lines i:nth-child(4){height:55%;animation-delay:-2s}
+.impact-card-dark{background:linear-gradient(145deg,#202633,#0e121a);border-color:rgba(255,255,255,.13);box-shadow:inset 0 1px rgba(255,255,255,.15),0 30px 80px rgba(20,27,40,.22)}
+.impact-card-dark .impact-card-copy strong{color:#f7f9fc}.impact-card-dark .impact-card-copy span{color:#8994a5}.impact-card-dark .impact-card-copy p{color:#a6afbc}
+.impact-mini-label{position:absolute;top:30px;left:30px;color:#98a3b3;font-size:8px;letter-spacing:.15em}
+.impact-word{position:absolute;top:110px;left:28px;font:600 clamp(62px,7vw,112px)/.8 Manrope;letter-spacing:-.1em;color:#fff;transform:rotate(-7deg)}
+.impact-word span{color:#8ca4ff}
+.impact-marquee{position:relative;z-index:1;display:flex;gap:24px;align-items:center;white-space:nowrap;overflow:hidden;margin-top:62px;padding:19px 0;border-top:1px solid rgba(130,145,170,.18);border-bottom:1px solid rgba(130,145,170,.18);color:#8993a2;font:500 11px Manrope;letter-spacing:.18em}
+.impact-marquee span{animation:marquee 18s linear infinite}
+.impact-marquee b{color:#9ba9ff;font-size:14px}
+@keyframes impactFloat{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-24px,20px) scale(1.06)}}
+@keyframes linePulse{0%,100%{opacity:.45;transform:scaleY(.82)}50%{opacity:1;transform:scaleY(1)}}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-80px)}}
+@media(max-width:1000px){.impact-grid{grid-template-columns:1fr 1fr}.impact-card-main{grid-column:1/-1;min-height:500px}.impact-card{min-height:430px}}
+@media(max-width:700px){.impact-layer{padding:82px 20px 70px}.impact-top{margin-bottom:38px}.impact-intro{margin-bottom:38px}.impact-intro h2{font-size:49px}.impact-grid{grid-template-columns:1fr;min-height:0}.impact-card,.impact-card-main{min-height:410px;grid-column:auto}.impact-card-copy{left:24px;right:24px;bottom:24px}.impact-card-glow{width:330px;height:330px}.impact-card-orbit{width:220px;height:220px}.impact-marquee{margin-top:40px}}
+@media(prefers-reduced-motion:reduce){.impact-card-glow,.impact-lines i,.impact-marquee span{animation:none}}
