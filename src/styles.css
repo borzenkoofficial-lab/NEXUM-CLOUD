@@ -255,3 +255,53 @@ body:after{content:'';position:fixed;z-index:-1;inset:0;pointer-events:none;back
   .about-carousel{height:390px;min-height:0;border-radius:22px}
   .about-bottom{margin-top:38px;padding-top:28px}
 }
+
+/* ABOUT NATIVE MOCKUP CAROUSEL — reliable local images */
+.about-native-track{
+  display:flex;
+  gap:18px;
+  height:100%;
+  overflow-x:auto;
+  overflow-y:hidden;
+  padding:30px;
+  scroll-snap-type:x mandatory;
+  scrollbar-width:none;
+  cursor:grab;
+}
+.about-native-track:active{cursor:grabbing}
+.about-native-track::-webkit-scrollbar{display:none}
+.about-native-card{
+  position:relative;
+  flex:0 0 min(68%,760px);
+  height:100%;
+  min-width:430px;
+  scroll-snap-align:center;
+  border-radius:24px;
+  overflow:hidden;
+  background:#fff;
+  border:1px solid rgba(255,255,255,.96);
+  box-shadow:0 24px 65px rgba(65,82,115,.14),inset 0 1px rgba(255,255,255,1);
+  transform:translateZ(0);
+}
+.about-native-image{position:absolute;inset:0;background:#f3f5f8}
+.about-native-image img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.about-native-caption{
+  position:absolute;left:18px;right:18px;bottom:18px;
+  display:flex;align-items:flex-end;justify-content:space-between;gap:18px;
+  padding:13px 15px;border:1px solid rgba(255,255,255,.84);border-radius:16px;
+  background:rgba(255,255,255,.72);backdrop-filter:blur(18px) saturate(150%);
+  -webkit-backdrop-filter:blur(18px) saturate(150%);
+  box-shadow:inset 0 1px rgba(255,255,255,.96),0 12px 30px rgba(50,65,95,.10)
+}
+.about-native-caption span{font:600 13px Manrope;color:#202733;letter-spacing:-.02em}
+.about-native-caption small{font-size:9px;letter-spacing:.08em;color:#7b8492;text-transform:uppercase}
+@media(max-width:900px){
+  .about-native-track{padding:22px;gap:14px}
+  .about-native-card{flex-basis:78%;min-width:340px}
+}
+@media(max-width:560px){
+  .about-native-track{padding:16px;gap:12px}
+  .about-native-card{flex-basis:88%;min-width:280px;border-radius:18px}
+  .about-native-caption{left:12px;right:12px;bottom:12px;padding:11px 12px}
+  .about-native-caption small{font-size:8px}
+}
