@@ -255,3 +255,24 @@ radial-gradient(300px 220px at 84% 72%,rgba(190,125,255,.17),transparent 72%);po
 .market-configurator .config-nav .config-next{min-width:150px}
 @media(max-width:900px){.market-config-grid{grid-template-columns:1fr;gap:45px}.market-config-panel{min-height:auto}}
 @media(max-width:620px){.market-configurator{padding-left:18px;padding-right:18px}.market-config-panel>div{padding:24px}.config-options{grid-template-columns:1fr 1fr}.config-options button{min-height:112px}.config-cart-head b{font-size:15px}}
+
+/* Hero Awards nomination */
+.award-stage{position:absolute;inset:80px 70px 78px;display:grid;place-items:center;transform-style:preserve-3d}
+.award-stage-glow{position:absolute;width:330px;height:330px;border-radius:50%;background:radial-gradient(circle,rgba(119,143,211,.2),transparent 68%);filter:blur(18px);animation:awardPulse 5s ease-in-out infinite}
+.award-main{position:relative;width:310px;min-height:350px;padding:24px 27px 20px;border:1px solid rgba(255,255,255,.96);border-radius:30px;background:linear-gradient(145deg,rgba(255,255,255,.82),rgba(232,237,247,.54));box-shadow:0 30px 75px rgba(51,69,108,.18),inset 0 1px #fff;backdrop-filter:blur(26px);z-index:5;text-align:center;transform:translateZ(65px) rotate(-1.5deg);animation:awardFloat 6s ease-in-out infinite}
+.award-kicker{display:block;font:600 7px Manrope;letter-spacing:.17em;color:#8995a8;text-align:left}
+.award-emblem{width:72px;height:72px;margin:26px auto 18px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#fff,#e7ecf5);border:1px solid rgba(255,255,255,.98);box-shadow:0 12px 30px rgba(67,84,125,.12),inset 0 1px #fff}
+.award-emblem span{font:500 27px Manrope;letter-spacing:-.08em;color:#34425b}.award-emblem small{position:absolute;margin:39px 0 0 30px;font:600 6px Manrope;color:#8b96a7}
+.award-main>p{margin:0;font:600 7px Manrope;letter-spacing:.2em;color:#8995a8}.award-main h2{margin:12px 0 18px;font:600 35px/.93 Manrope;letter-spacing:-.065em;color:#26344a}.award-main h2 em{font-style:normal;color:#8290a6}
+.award-rule{height:1px;background:rgba(105,123,158,.15);margin:0 0 13px}.award-meta{display:flex;justify-content:space-between;align-items:center}.award-meta span,.award-meta b{font:600 6px Manrope;letter-spacing:.1em;color:#929dad}
+.award-card{position:absolute;width:165px;padding:15px 17px;border:1px solid rgba(255,255,255,.94);border-radius:20px;background:rgba(255,255,255,.62);box-shadow:0 22px 55px rgba(51,69,108,.13),inset 0 1px #fff;backdrop-filter:blur(20px);z-index:7;display:flex;flex-direction:column;gap:5px}
+.award-card span{font:600 6px Manrope;letter-spacing:.15em;color:#9aa4b4}.award-card b{font:600 13px Manrope;letter-spacing:-.02em;color:#3b485e}.award-card small{font-size:7px;color:#8e99aa;line-height:1.4}
+.award-card-alpha{right:-2px;top:20px;transform:rotate(5deg) translateZ(95px);animation:awardCardA 7s ease-in-out infinite}.award-card-alpha b{color:#a34d52}
+.award-card-product{left:-18px;top:92px;transform:rotate(-7deg) translateZ(30px);animation:awardCardB 6s ease-in-out infinite}
+.award-card-team{right:-12px;bottom:90px;transform:rotate(6deg) translateZ(35px);animation:awardCardC 6.5s ease-in-out infinite}
+.award-card-vision{left:5px;bottom:35px;transform:rotate(-5deg) translateZ(15px);animation:awardCardD 7.5s ease-in-out infinite}
+@keyframes awardPulse{0%,100%{scale:.9;opacity:.55}50%{scale:1.08;opacity:.9}}@keyframes awardFloat{0%,100%{translate:0 0}50%{translate:0 -8px}}@keyframes awardCardA{0%,100%{translate:0 0}50%{translate:5px -9px}}@keyframes awardCardB{0%,100%{translate:0 0}50%{translate:-5px 8px}}@keyframes awardCardC{0%,100%{translate:0 0}50%{translate:4px -7px}}@keyframes awardCardD{0%,100%{translate:0 0}50%{translate:-4px 7px}}
+@media(max-width:900px){.award-stage{inset:75px 35px 70px;transform:scale(.9)}}
+@media(max-width:700px){.award-stage{inset:75px 12px 68px;transform:scale(.75)}.award-card{width:145px}.award-main{width:290px}}
+@media(max-width:480px){.award-stage{transform:scale(.64)}}
+@media(prefers-reduced-motion:reduce){.award-stage-glow,.award-main,.award-card{animation:none!important}}
