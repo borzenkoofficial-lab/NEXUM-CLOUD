@@ -155,3 +155,30 @@ radial-gradient(300px 220px at 84% 72%,rgba(190,125,255,.17),transparent 72%);po
 .product-cta .primary{display:inline-flex;margin-top:18px}
 @media(max-width:900px){.market-hero{grid-template-columns:1fr;gap:20px}.market-hero>p:last-child{max-width:620px}.market-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.market-card:nth-child(1){grid-column:span 2}.product-hero{grid-template-columns:1fr;gap:40px}.product-details{grid-template-columns:1fr;gap:45px}.product-mockup{min-height:420px}}
 @media(max-width:620px){.market-hero{padding:130px 20px 55px}.market-hero:after{font-size:8px}.market-grid{grid-template-columns:1fr;padding:0 20px 80px;gap:16px}.market-card:nth-child(1){grid-column:auto}.market-card:nth-child(1) .market-card-visual,.market-card-visual{height:260px}.footer-v2{padding:35px 20px;align-items:flex-start;flex-direction:column}.product-hero{padding:125px 20px 55px}.product-back{margin-bottom:40px}.product-mockup{min-height:330px;padding:25px;border-radius:28px}.product-details{padding:50px 20px 80px}.product-cta{margin:0 20px 60px;padding:55px 25px;border-radius:30px}}
+
+/* MARKET / PRODUCT FORMS + 3D */
+.market-form-section,.product-form-section{max-width:1240px;margin:0 auto;padding:20px 32px 120px}
+.brief-form{position:relative;overflow:hidden;padding:34px;border:1px solid rgba(255,255,255,.86);border-radius:34px;background:linear-gradient(135deg,rgba(255,255,255,.74),rgba(244,247,251,.5));box-shadow:0 30px 100px rgba(48,62,90,.12),inset 0 1px rgba(255,255,255,.96);backdrop-filter:blur(28px) saturate(160%);-webkit-backdrop-filter:blur(28px) saturate(160%);transform:translateZ(0)}
+.brief-form:before{content:'';position:absolute;width:360px;height:360px;right:-110px;top:-180px;border-radius:50%;background:radial-gradient(circle,rgba(170,190,255,.25),transparent 68%);filter:blur(8px);pointer-events:none}
+.brief-form:after{content:'';position:absolute;left:12%;bottom:-90px;width:45%;height:180px;border-radius:50%;background:rgba(255,255,255,.7);filter:blur(55px);pointer-events:none}
+.brief-form-head{position:relative;z-index:1;display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:28px}
+.brief-form-head h3{margin:7px 0 0;font:600 clamp(30px,4vw,52px)/.98 Manrope,sans-serif;letter-spacing:-.055em;color:#202735}
+.brief-form-head>span{padding:9px 12px;border:1px solid rgba(255,255,255,.9);border-radius:99px;background:rgba(255,255,255,.55);font:600 9px Manrope;color:#8994a7;letter-spacing:.13em}
+.brief-form-grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.brief-form label{display:flex;flex-direction:column;gap:8px}
+.brief-form label span{padding-left:4px;color:#7d8899;font:600 9px Manrope;letter-spacing:.12em;text-transform:uppercase}
+.brief-form input,.brief-form select,.brief-form textarea{width:100%;border:1px solid rgba(122,142,170,.14);outline:none;border-radius:18px;padding:15px 17px;background:rgba(255,255,255,.62);box-shadow:inset 0 1px rgba(255,255,255,.9),0 8px 24px rgba(50,65,95,.035);color:#273143;font:400 14px Manrope;transition:border-color .25s ease,box-shadow .25s ease,transform .25s ease,background .25s ease}
+.brief-form input::placeholder,.brief-form textarea::placeholder{color:#a5adba}
+.brief-form input:focus,.brief-form select:focus,.brief-form textarea:focus{border-color:rgba(70,92,150,.34);background:rgba(255,255,255,.82);box-shadow:0 0 0 4px rgba(110,130,190,.09),0 14px 35px rgba(50,65,95,.08);transform:translateY(-1px)}
+.brief-form textarea{resize:vertical;min-height:110px}
+.brief-form-wide{grid-column:1/-1}
+.brief-submit{position:relative;z-index:1;margin-top:18px;display:inline-flex;align-items:center;gap:10px;border:0;border-radius:99px;padding:15px 21px;background:linear-gradient(135deg,#172033,#3d4f72);color:#fff;box-shadow:0 18px 42px rgba(37,49,73,.22),inset 0 1px rgba(255,255,255,.25);font:600 12px Manrope;cursor:pointer;transition:transform .3s ease,box-shadow .3s ease}
+.brief-submit:hover{transform:translateY(-3px) scale(1.015);box-shadow:0 24px 55px rgba(37,49,73,.28),inset 0 1px rgba(255,255,255,.3)}
+.product-mockup-3d{perspective:1200px;transform-style:preserve-3d;transition:transform .18s ease-out;position:relative}
+.product-mockup-3d:before{content:'';position:absolute;inset:8% 12%;border-radius:38px;background:radial-gradient(circle at 50% 50%,rgba(130,155,220,.24),transparent 67%);filter:blur(30px);transform:translateZ(-80px);pointer-events:none}
+.product-mockup-3d img{position:relative;z-index:1;transform:translateZ(28px);filter:drop-shadow(0 35px 45px rgba(36,49,74,.18));transition:filter .35s ease}
+.product-mockup-3d:hover img{filter:drop-shadow(0 45px 58px rgba(36,49,74,.24))}
+.product-orb{position:absolute;z-index:2;width:54px;height:54px;border:1px solid rgba(255,255,255,.85);border-radius:50%;background:linear-gradient(135deg,rgba(255,255,255,.78),rgba(205,218,245,.4));box-shadow:0 18px 40px rgba(50,70,110,.16),inset 0 1px #fff;backdrop-filter:blur(14px);animation:marketFloat 4s ease-in-out infinite}
+.orb-one{right:7%;top:16%}.orb-two{left:8%;bottom:18%;width:34px;height:34px;animation-delay:-1.4s}
+@keyframes marketFloat{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(0,-12px,18px)}}
+@media(max-width:620px){.market-form-section,.product-form-section{padding:10px 20px 80px}.brief-form{padding:23px;border-radius:26px}.brief-form-grid{grid-template-columns:1fr}.brief-form-wide{grid-column:auto}.brief-form-head h3{font-size:32px}.brief-form input,.brief-form select,.brief-form textarea{border-radius:15px}.brief-submit{width:100%;justify-content:center}.product-orb{display:none}}
