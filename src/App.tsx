@@ -1,5 +1,5 @@
 import { ArrowDown, ArrowUpRight, Box, Bot, Layers3, Orbit, Sparkles, Workflow } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type CSSProperties } from 'react';
 import { HeroScene } from './components/HeroScene';
 
 const capabilities = [
