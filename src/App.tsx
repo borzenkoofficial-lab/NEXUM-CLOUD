@@ -55,20 +55,42 @@ const reveal: Variants = {
   show:{ opacity:1, y:0, transition:{ duration:.7, ease:'easeOut' } }
 };
 
+function BriefForm({product}:{product?:typeof marketProducts[number]}){
+  return <form className="brief-form" onSubmit={(e)=>{
+    e.preventDefault();
+    const data=new FormData(e.currentTarget);
+    const subject=encodeURIComponent(product ? `Заявка: ${product.title}` : 'Заявка в NEXUM CLOUD');
+    const body=encodeURIComponent(Array.from(data.entries()).map(([k,v])=>`${k}: ${v}`).join('\\n'));
+    window.location.href=`mailto:hello@nexum.cloud?subject=${subject}&body=${body}`;
+  }}>
+    <div className="brief-form-head"><div><p className="eyebrow">QUICK BRIEF</p><h3>{product ? 'Заказать продукт.' : 'Не нашли нужное?'}</h3></div><span>01—04</span></div>
+    <div className="brief-form-grid">
+      <label><span>Имя</span><input name="Имя" required placeholder="Как к вам обращаться?" /></label>
+      <label><span>Контакт</span><input name="Контакт" required placeholder="Telegram / телефон / email" /></label>
+      <label><span>Бюджет</span><select name="Бюджет" defaultValue=""><option value="" disabled>Выберите диапазон</option><option>до 50 000 ₽</option><option>50 000 — 100 000 ₽</option><option>100 000 — 250 000 ₽</option><option>250 000 ₽+</option></select></label>
+      <label><span>Срок</span><select name="Срок" defaultValue=""><option value="" disabled>Когда нужен запуск?</option><option>Как можно скорее</option><option>2–4 недели</option><option>1–2 месяца</option><option>Срок не критичен</option></select></label>
+      <label className="brief-form-wide"><span>Задача</span><textarea name="Задача" rows={4} placeholder={product ? 'Коротко опишите, что хотите получить…' : 'Что нужно сделать или улучшить?'} /></label>
+    </div>
+    <button className="brief-submit" type="submit">Получить расчёт <ArrowUpRight size={17}/></button>
+  </form>
+}
 function MarketPage(){
   return <main className="market-page">
-    <nav className="nav"><a className="brand" href="/"><span className="brand-mark">N</span><span>NEXUM CLOUD</span></a><div className="nav-links"><a href="/">Студия</a><a className="active" href="/market">Маркет</a><a href="/#projects">Проекты</a></div><a className="nav-cta glass-button" href="/#contact">Обсудить проект <ArrowUpRight size={15}/></a></nav>
+    <nav className="nav"><a className="brand" href="/"><span className="brand-mark">N</span><span>NEXUM CLOUD</span></a><div className="nav-links"><a href="/">Студия</a><a className="active" href="/market">Маркет</a><a href="/#projects">Проекты</a></div><a className="nav-cta glass-button" href="#market-form">Обсудить проект <ArrowUpRight size={15}/></a></nav>
     <section className="market-hero"><p className="eyebrow">NEXUM CLOUD / MARKET</p><h1>Готовые решения.<br/><em>Собраны под задачу.</em></h1><p>Выберите услугу, откройте продукт и посмотрите, что входит в работу, сроки и стоимость.</p></section>
     <section className="market-grid">{marketProducts.map((p,i)=><motion.a href={`/market/${p.slug}`} className="market-card" key={p.slug} initial={{opacity:0,y:24}} whileInView={{opacity:1,y:0}} viewport={{once:true,amount:.1}} transition={{delay:i*.035}} whileHover={{y:-8}}><div className="market-card-visual"><img src={p.src} alt=""/><span>{p.tag}</span></div><div className="market-card-info"><div><small>{String(i+1).padStart(2,'0')}</small><h2>{p.title}</h2><p>{p.text}</p></div><div className="market-card-bottom"><b>{p.price}</b><span><ArrowUpRight size={17}/></span></div></div></motion.a>)}</section>
-    <footer className="footer-v2"><div><b>NEXUM CLOUD</b><span>Цифровые продукты и системы.</span></div><a href="/#contact">Обсудить проект <ArrowUpRight size={15}/></a></footer>
+    <section id="market-form" className="market-form-section"><BriefForm /></section>
+    <footer className="footer-v2"><div><b>NEXUM CLOUD</b><span>Цифровые продукты и системы.</span></div><a href="#market-form">Обсудить проект <ArrowUpRight size={15}/></a></footer>
   </main>
 }
 
 function ProductPage({product}:{product:typeof marketProducts[number]}){
-  return <main className="product-page"><nav className="nav"><a className="brand" href="/"><span className="brand-mark">N</span><span>NEXUM CLOUD</span></a><div className="nav-links"><a href="/market">Маркет</a><a href="/#projects">Проекты</a></div><a className="nav-cta glass-button" href="/#contact">Обсудить проект <ArrowUpRight size={15}/></a></nav>
-    <section className="product-hero"><div className="product-copy"><a className="product-back" href="/market">← Вернуться в Маркет</a><p className="eyebrow">{product.tag} / NEXUM CLOUD</p><h1>{product.title}</h1><p>{product.text}</p><strong>{product.price}</strong><a className="primary glass-button" href="/#contact">Заказать продукт <ArrowUpRight size={16}/></a></div><div className="product-mockup"><img src={product.src} alt={product.title}/></div></section>
+  const [tilt,setTilt]=useState({x:0,y:0});
+  return <main className="product-page"><nav className="nav"><a className="brand" href="/"><span className="brand-mark">N</span><span>NEXUM CLOUD</span></a><div className="nav-links"><a href="/market">Маркет</a><a href="/#projects">Проекты</a></div><a className="nav-cta glass-button" href="#product-form">Заказать <ArrowUpRight size={15}/></a></nav>
+    <section className="product-hero"><div className="product-copy"><a className="product-back" href="/market">← Вернуться в Маркет</a><p className="eyebrow">{product.tag} / NEXUM CLOUD</p><h1>{product.title}</h1><p>{product.text}</p><strong>{product.price}</strong><a className="primary glass-button" href="#product-form">Заказать продукт <ArrowUpRight size={16}/></a></div><motion.div className="product-mockup product-mockup-3d" style={{rotateX:tilt.y,rotateY:tilt.x}} onPointerMove={(e)=>{const r=e.currentTarget.getBoundingClientRect();setTilt({x:((e.clientX-r.left)/r.width-.5)*10,y:-((e.clientY-r.top)/r.height-.5)*8})}} onPointerLeave={()=>setTilt({x:0,y:0})}><img src={product.src} alt={product.title}/><span className="product-orb orb-one"/><span className="product-orb orb-two"/></motion.div></section>
     <section className="product-details"><div><p className="eyebrow">ЧТО ВХОДИТ</p><h2>Собираем продукт<br/><em>от идеи до запуска.</em></h2></div><div className="product-features">{product.features.map((f,i)=><div key={f}><span>0{i+1}</span><b>{f}</b><Check size={17}/></div>)}</div></section>
-    <section className="product-cta"><p className="eyebrow">ГОТОВЫ НАЧАТЬ?</p><h2>Расскажите, что<br/><em>нужно собрать.</em></h2><a className="primary glass-button" href="/#contact">Обсудить задачу <ArrowUpRight size={16}/></a></section>
+    <section id="product-form" className="product-form-section"><BriefForm product={product} /></section>
+    <section className="product-cta"><p className="eyebrow">ГОТОВЫ НАЧАТЬ?</p><h2>Расскажите, что<br/><em>нужно собрать.</em></h2><a className="primary glass-button" href="#product-form">Обсудить задачу <ArrowUpRight size={16}/></a></section>
   </main>
 }
 
