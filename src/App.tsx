@@ -1,7 +1,6 @@
 import { ArrowDown, ArrowUpRight, Box, Bot, Layers3, Orbit, Sparkles, Workflow, Smartphone, Globe2, Database, Wand2 } from 'lucide-react';
-import { motion, useScroll, useTransform, type Variants } from 'motion/react';
-import { useRef } from 'react';
-import { HeroScene } from './components/HeroScene';
+import { AnimatePresence, motion, useScroll, useTransform, type Variants } from 'motion/react';
+import { useEffect, useRef, useState } from 'react';
 import RawFlexCarousel from './components/FlexCarousel/FlexCarousel';
 
 const FlexCarousel: any = RawFlexCarousel;
@@ -43,6 +42,13 @@ const process = [
   ['04','LAUNCH','Проверяем сценарии, оптимизируем и доводим до production.'],
 ];
 
+const heroLabels = [
+  { eyebrow:'DIGITAL PRODUCT', title:'Сайт, который работает на бизнес.', meta:'WEB · UX · FRONTEND' },
+  { eyebrow:'LIQUID INTERFACE', title:'Интерфейс, который хочется изучать.', meta:'UI · MOTION · GLASS' },
+  { eyebrow:'AI EXPERIENCE', title:'AI встроен прямо в продукт.', meta:'AI · AUTOMATION · SYSTEMS' },
+  { eyebrow:'CONNECTED SYSTEM', title:'Все сервисы — в одной экосистеме.', meta:'CRM · API · TELEGRAM' },
+];
+
 const reveal: Variants = {
   hidden: { opacity: 0, y: 26 },
   show: { opacity: 1, y: 0, transition: { duration: .7, ease: 'easeOut' } }
@@ -55,6 +61,11 @@ export default function App() {
   const heroScale = useTransform(scrollYProgress, [0, .2], [1, .95]);
   const heroOpacity = useTransform(scrollYProgress, [0, .18], [1, .35]);
   const navBlur = useTransform(scrollYProgress, [0, .08], [0, 1]);
+  const [heroLabel, setHeroLabel] = useState(0);
+  useEffect(() => {
+    const timer = window.setInterval(() => setHeroLabel((value) => (value + 1) % heroLabels.length), 3200);
+    return () => window.clearInterval(timer);
+  }, []);
 
   return <main>
     <motion.div className="scroll-progress" style={{ scaleX: scrollYProgress }} />
@@ -83,13 +94,36 @@ export default function App() {
         </motion.div>
       </motion.div>
 
-      <motion.div className="hero-visual glass-panel" style={{ scale: heroScale }}>
-        <div className="scene-caption"><span>REALTIME DIGITAL ENVIRONMENT</span><span>01 / 06</span></div>
-        <div className="scene-chip glass-button"><span className="status-dot"/> LIVE / WEBGL</div>
+      <motion.div className="hero-visual hero-product glass-panel" style={{ scale: heroScale }}>
+        <div className="scene-caption"><span>NEXUM / DIGITAL PRODUCT</span><span>0{heroLabel + 1} / 04</span></div>
+        <div className="scene-chip glass-button"><span className="status-dot"/> LIVE / PREVIEW</div>
+        <div className="hero-product-glow" />
+        <div className="website-mockup">
+          <div className="mock-browser-bar">
+            <span className="browser-dots"><i/><i/><i/></span>
+            <span>nexum.cloud</span>
+            <span className="browser-status">LIVE</span>
+          </div>
+          <img src="/assets/mockups/web-product.svg" alt="Пример дизайна цифрового продукта Nexum Cloud" />
+          <div className="mockup-reflection" />
+        </div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={heroLabel}
+            className="hero-changing-copy"
+            initial={{ opacity: 0, y: 18, filter: 'blur(8px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            exit={{ opacity: 0, y: -14, filter: 'blur(8px)' }}
+            transition={{ duration: .55, ease: 'easeOut' }}
+          >
+            <span>{heroLabels[heroLabel].eyebrow}</span>
+            <strong>{heroLabels[heroLabel].title}</strong>
+            <small>{heroLabels[heroLabel].meta}</small>
+          </motion.div>
+        </AnimatePresence>
+        <div className="hero-glass-orb" />
         <div className="hero-orbit-label glass-button"><Wand2 size={14}/> LIQUID GLASS</div>
-        <HeroScene/>
-        <div className="hero-visual-copy"><strong>Digital environment</strong><span>WEBGL · MOTION · AI · SYSTEMS</span></div>
-        <div className="visual-label"><span>INTERACTIVE 3D</span><span>DRAG · ROTATE</span></div>
+        <div className="visual-label"><span>INTERACTIVE PRODUCT</span><span>AUTOPLAY / 04</span></div>
       </motion.div>
     </section>
 
