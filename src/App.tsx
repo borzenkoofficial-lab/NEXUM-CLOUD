@@ -1,6 +1,7 @@
 import { ArrowDown, ArrowUpRight, Bot, Database, Globe2, Layers3, Orbit, Sparkles, Smartphone, Workflow, Zap, Check } from 'lucide-react';
 import { AnimatePresence, motion, useScroll, useTransform, type Variants } from 'motion/react';
 import { useEffect, useState } from 'react';
+import GlassSurface from './components/GlassSurface';
 
 const capabilities = [
   { n:'01', icon:Globe2, title:'Сайты и digital-продукты', text:'Имиджевые сайты, сервисы и продуктовые интерфейсы, которые выглядят дорого и ведут пользователя к действию.' },
@@ -61,13 +62,13 @@ export default function App(){
   return <main>
     <motion.div className="scroll-progress" style={{scaleX:scrollYProgress}} />
 
-    <nav className="nav">
+    <GlassSurface className="nav" borderRadius={22} borderWidth={0.11} brightness={58} opacity={0.92} blur={10} displace={0.8} backgroundOpacity={0.12} saturation={1.25} distortionScale={-145} redOffset={0} greenOffset={8} blueOffset={16} mixBlendMode="difference">
       <a className="brand" href="#"><span className="brand-mark">N</span><span>NEXUM CLOUD</span></a>
       <div className="nav-links">
         <a href="#about">Студия</a><a href="#showcase">Витрина</a><a href="#services">Услуги</a><a href="#projects">Проекты</a>
       </div>
       <a className="nav-cta glass-button" href="#contact">Обсудить проект <ArrowUpRight size={15}/></a>
-    </nav>
+    </GlassSurface>
 
     <section className="hero hero-v2">
       <motion.div className="hero-copy" style={{y:heroY,opacity:heroOpacity}}>
