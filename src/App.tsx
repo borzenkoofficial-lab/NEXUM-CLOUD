@@ -75,8 +75,23 @@ function BriefForm({product}:{product?:typeof marketProducts[number]}){
   </form>
 }
 function MarketPage(){
+  const [filter,setFilter]=useState('ALL');
+  const [cart,setCart]=useState<string[]>([]);
+  const [step,setStep]=useState(0);
+  const [kind,setKind]=useState('site');
+  const [addons,setAddons]=useState<string[]>([]);
+  const filters=['ALL','WEB','AI','MOBILE','TELEGRAM','SYSTEMS'];
+  const categories=(tag:string)=>tag==='WEB'?'WEB':tag==='AI'?'AI':tag==='MOBILE'?'MOBILE':tag==='TELEGRAM'?'TELEGRAM':'SYSTEMS';
+  const visible=filter==='ALL'?marketProducts:marketProducts.filter(p=>categories(p.tag)===filter);
+  const selected=marketProducts.filter(p=>cart.includes(p.slug));
+  const add=(slug:string)=>setCart(v=>v.includes(slug)?v.filter(x=>x!==slug):[...v,slug]);
+  const base=kind==='site'?49000:kind==='ai'?39000:kind==='telegram'?29000:79000;
+  const addonPrice=addons.length*12000;
+  const total=base+addonPrice;
+  const toggleAddon=(name:string)=>setAddons(v=>v.includes(name)?v.filter(x=>x!==name):[...v,name]);
   return <main className="market-page">
-    <nav className="nav"><a className="brand" href="/"><span className="brand-mark">N</span><span>NEXUM CLOUD</span></a><div className="nav-links"><a href="/">Студия</a><a className="active" href="/market">Маркет</a><a href="/#projects">Проекты</a></div><a className="nav-cta glass-button" href="#market-form">Обсудить проект <ArrowUpRight size={15}/></a></nav>
+    <nav className="nav"><a className="brand" href="/"><span className="brand-mark">N</span><span>NEXUM CLOUD</span></a><div className="nav-links"><a href="/">Студия</a><a className="active" href="/market">Маркет</a><a href="/#projects">Проекты</a></div><a className="nav-cta glass-button" href="#market-config">Собрать проект <ArrowUpRight size={15}/></a></nav>
+
     <section className="market-hero market-hero-store" aria-label="NEXUM Cloud Market">
       <div className="market-hero-scene">
         <div className="market-flow">
@@ -87,17 +102,58 @@ function MarketPage(){
           <div className="market-core"><span>N</span><i></i></div>
           <div className="market-particle particle-one"></div><div className="market-particle particle-two"></div><div className="market-particle particle-three"></div>
         </div>
-        <div className="market-flow-line line-one"></div><div className="market-flow-line line-two"></div>
-        <div className="market-wallet"><div className="wallet-top"><span>NEXUM</span><b>•••• 2481</b></div><strong>₽ 128 400</strong><small>AVAILABLE BALANCE</small><div className="wallet-bars"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+        <div className="market-wallet"><div className="wallet-top"><span>NEXUM WALLET</span><b>•••• 2481</b></div><strong>₽ 128 400</strong><small>AVAILABLE BALANCE</small><div className="wallet-bars"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
         <div className="market-transaction"><span className="tx-dot"></span><div><b>Digital product</b><small>Payment completed</small></div><strong>+ ₽49 000</strong></div>
+        <div className="market-hero-label"><span>NEXUM MARKET</span><b>BUY · BUILD · LAUNCH</b></div>
       </div>
     </section>
-    <section className="market-grid">{marketProducts.map((p,i)=><motion.a href={`/market/${p.slug}`} className="market-card" key={p.slug} initial={{opacity:0,y:24}} whileInView={{opacity:1,y:0}} viewport={{once:true,amount:.1}} transition={{delay:i*.035}} whileHover={{y:-8}}><div className="market-card-visual"><img src={p.src} alt=""/><span>{p.tag}</span></div><div className="market-card-info"><div><small>{String(i+1).padStart(2,'0')}</small><h2>{p.title}</h2><p>{p.text}</p></div><div className="market-card-bottom"><b>{p.price}</b><span><ArrowUpRight size={17}/></span></div></div></motion.a>)}</section>
-    <section id="market-form" className="market-form-section"><BriefForm /></section>
-    <footer className="footer-v2"><div><b>NEXUM CLOUD</b><span>Цифровые продукты и системы.</span></div><a href="#market-form">Обсудить проект <ArrowUpRight size={15}/></a></footer>
+
+    <section className="market-store-intro"><div><span>01 / MARKET</span><h1>Выберите цифровой<br/><em>продукт.</em></h1></div><p>Готовые digital-решения, которые можно купить отдельно или собрать в один проект.</p></section>
+
+    <section className="market-filters" aria-label="Категории магазина">
+      {filters.map(f=><button key={f} className={filter===f?'active':''} onClick={()=>setFilter(f)}>{f}</button>)}
+    </section>
+
+    <section className="market-grid market-grid-shop">{visible.map((p,i)=>{
+      const inCart=cart.includes(p.slug);
+      return <motion.div className={`market-card market-shop-card ${inCart?'is-selected':''}`} key={p.slug} layout initial={{opacity:0,y:24}} animate={{opacity:1,y:0}} transition={{delay:i*.035}} whileHover={{y:-8}}>
+        <a href={`/market/${p.slug}`} className="market-card-visual"><img src={p.src} alt=""/><span>{p.tag}</span><i>PREVIEW <ArrowUpRight size={12}/></i></a>
+        <div className="market-card-info"><div><small>{String(i+1).padStart(2,'0')}</small><h2>{p.title}</h2><p>{p.text}</p></div><div className="market-card-bottom"><b>{p.price}</b><button type="button" className={inCart?'cart-added':''} onClick={()=>add(p.slug)}>{inCart?'✓ В проект':'＋ В проект'}</button></div></div>
+      </motion.div>
+    })}</section>
+
+    <section id="market-config" className="market-configurator">
+      <div className="market-section-kicker"><span>02 / CONFIGURATOR</span><span>BUILD YOUR PRODUCT</span></div>
+      <div className="market-config-grid">
+        <div className="market-config-copy"><p className="eyebrow">СОБЕРИТЕ СВОЙ ПРОДУКТ</p><h2>Не нашли готовый вариант?<br/><em>Соберите свой.</em></h2><p>Выберите основу, добавьте нужные сервисы и получите ориентир по стоимости.</p>
+          <div className="config-steps"><button className={step===0?'active':''} onClick={()=>setStep(0)}><span>01</span><b>Основа</b></button><button className={step===1?'active':''} onClick={()=>setStep(1)}><span>02</span><b>Интеграции</b></button><button className={step===2?'active':''} onClick={()=>setStep(2)}><span>03</span><b>Расчёт</b></button></div>
+        </div>
+        <div className="market-config-panel">
+          <AnimatePresence mode="wait">
+            {step===0&&<motion.div key="base" initial={{opacity:0,x:20}} animate={{opacity:1,x:0}} exit={{opacity:0,x:-20}}><span className="config-label">ВЫБЕРИТЕ ОСНОВУ</span><div className="config-options">{[['site','WEB','Сайт'],['ai','AI','AI-ассистент'],['telegram','TELEGRAM','Telegram-бот'],['crm','CRM','CRM / система']].map(([v,t,l])=><button key={v} className={kind===v?'selected':''} onClick={()=>setKind(v)}><span>{t}</span><b>{l}</b><small>{v==='site'?'от 49 000 ₽':v==='ai'?'от 39 000 ₽':v==='telegram'?'от 29 000 ₽':'от 79 000 ₽'}</small></button>)}</div><button className="config-next" onClick={()=>setStep(1)}>Далее <ArrowUpRight size={15}/></button></motion.div>}
+            {step===1&&<motion.div key="addons" initial={{opacity:0,x:20}} animate={{opacity:1,x:0}} exit={{opacity:0,x:-20}}><span className="config-label">ДОБАВЬТЕ ИНТЕГРАЦИИ</span><div className="config-options config-addons">{['Оплата','Telegram','CRM','Аналитика'].map(x=><button key={x} className={addons.includes(x)?'selected':''} onClick={()=>toggleAddon(x)}><span>{addons.includes(x)?'✓':'+'}</span><b>{x}</b><small>+ 12 000 ₽</small></button>)}</div><div className="config-nav"><button onClick={()=>setStep(0)}>Назад</button><button className="config-next" onClick={()=>setStep(2)}>Рассчитать <ArrowUpRight size={15}/></button></div></motion.div>}
+            {step===2&&<motion.div key="total" initial={{opacity:0,scale:.97}} animate={{opacity:1,scale:1}}><span className="config-label">ВАШ ПРОЕКТ</span><div className="config-total"><small>ОСНОВА</small><b>{kind==='site'?'Сайт':kind==='ai'?'AI-ассистент':kind==='telegram'?'Telegram-бот':'CRM / система'}</b><div>{addons.map(x=><span key={x}>{x}</span>)}</div><strong>≈ {total.toLocaleString('ru-RU')} ₽</strong><small>Ориентировочный срок: 2–4 недели</small></div><div className="config-nav"><button onClick={()=>setStep(1)}>Изменить</button><a className="config-next" href="#market-checkout">Получить расчёт <ArrowUpRight size={15}/></a></div></motion.div>}
+          </AnimatePresence>
+        </div>
+      </div>
+    </section>
+
+    <section className="market-cart-section">
+      <div className="market-section-kicker"><span>03 / CART</span><span>YOUR DIGITAL PRODUCT</span></div>
+      <div className="market-cart-shell">
+        <div><p className="eyebrow">ВАШ ПРОЕКТ</p><h2>Соберите<br/><em>свою систему.</em></h2><p>Добавляйте продукты в проект — здесь они превращаются из каталога в конкретную задачу.</p></div>
+        <div className="market-cart-list">{selected.length?<>{selected.map(p=><div className="market-cart-row" key={p.slug}><img src={p.src} alt=""/><div><b>{p.title}</b><small>{p.tag}</small></div><strong>{p.price}</strong><button onClick={()=>add(p.slug)}>×</button></div>)}<div className="market-cart-total"><span>ВЫБРАНО {selected.length}</span><b>Перейти к расчёту <ArrowUpRight size={15}/></b></div></>:<div className="market-cart-empty"><span>+</span><p>Добавьте продукт из каталога</p></div>}</div>
+      </div>
+    </section>
+
+    <section id="market-checkout" className="market-checkout">
+      <div className="market-section-kicker"><span>04 / CHECKOUT</span><span>READY TO START</span></div>
+      <div className="market-checkout-grid"><div><p className="eyebrow">PROJECT CHECKOUT</p><h2>Продукт готов.<br/><em>Осталось запустить.</em></h2><p>Оставьте контакты — мы уточним задачу, финальную стоимость и сроки перед стартом.</p></div><BriefForm /></div>
+    </section>
+
+    <footer className="footer-v2"><div><b>NEXUM CLOUD</b><span>Digital products / Market / Systems.</span></div><a href="#market-checkout">Начать проект <ArrowUpRight size={15}/></a></footer>
   </main>
 }
-
 function ProductPage({product}:{product:typeof marketProducts[number]}){
   const [tilt,setTilt]=useState({x:0,y:0});
   return <main className="product-page"><nav className="nav"><a className="brand" href="/"><span className="brand-mark">N</span><span>NEXUM CLOUD</span></a><div className="nav-links"><a href="/market">Маркет</a><a href="/#projects">Проекты</a></div><a className="nav-cta glass-button" href="#product-form">Заказать <ArrowUpRight size={15}/></a></nav>
