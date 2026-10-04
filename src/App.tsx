@@ -84,7 +84,7 @@ export default function App(){
         </div>
       </motion.div>
 
-      <motion.div className="hero-v2-stage glass-panel" initial={{opacity:0,scale:.96}} animate={{opacity:1,scale:1}} transition={{duration:1,delay:.15}}>
+      <motion.div className="hero-v2-stage glass-panel" onPointerMove={(e)=>{const r=e.currentTarget.getBoundingClientRect();const x=e.clientX-r.left;const y=e.clientY-r.top;const edge=Math.min(x,y,r.width-x,r.height-y);const proximity=Math.max(0,Math.min(1,1-edge/150));e.currentTarget.style.setProperty('--glow-x',(x/r.width)*100+'%');e.currentTarget.style.setProperty('--glow-y',(y/r.height)*100+'%');e.currentTarget.style.setProperty('--edge-alpha',proximity.toFixed(3));e.currentTarget.style.setProperty('--glow-angle',(Math.atan2(y-r.height/2,x-r.width/2)*180/Math.PI+90)+'deg')}} onPointerLeave={(e)=>e.currentTarget.style.setProperty('--edge-alpha','0')} initial={{opacity:0,scale:.96}} animate={{opacity:1,scale:1}} transition={{duration:1,delay:.15}}><span className="stage-glow-beacon" />
         <div className="stage-top"><span>NEXUM / LIVE EXPERIENCE</span><span>0{heroIndex+1} / 04</span></div>
         <div className="stage-orbit orbit-one"/><div className="stage-orbit orbit-two"/>
         <div className="stage-core">
