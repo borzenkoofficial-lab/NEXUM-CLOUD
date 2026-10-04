@@ -13,6 +13,9 @@ const capabilities = [
   { n:'04', icon:Bot, title:'AI и интеллектуальные функции', text:'AI-интерфейсы, ассистенты, автоматизация и умные сценарии, встроенные в реальный продукт.' },
   { n:'05', icon:Database, title:'CRM и внутренние системы', text:'Кабинеты, CRM, панели управления, базы данных и цифровые рабочие пространства.' },
   { n:'06', icon:Workflow, title:'Интеграции и автоматизация', text:'Telegram, платежи, API, уведомления, внешние сервисы и бизнес-процессы в единой системе.' },
+  { n:'07', icon:Sparkles, title:'Поддержка и развитие', text:'Техническая поддержка, обновления, аналитика, улучшения и сопровождение после запуска.' },
+  { n:'08', icon:Layers3, title:'Хостинг и инфраструктура', text:'Размещение, SSL, CDN, резервные копии, мониторинг и стабильная работа проекта.' },
+  { n:'09', icon:Globe2, title:'Домен и запуск', text:'Подбор и подключение домена, DNS, почты, SSL и полный запуск проекта в сети.' },
 ];
 
 const showcaseItems = [
@@ -22,6 +25,9 @@ const showcaseItems = [
   { src: '/assets/mockups/telegram-bot.svg', alt: 'Мокап Telegram бота', title: 'BOT / 04', subtitle: 'Telegram automation' },
   { src: '/assets/mockups/crm-system.svg', alt: 'Мокап CRM системы', title: 'CRM / 05', subtitle: 'Digital system' },
   { src: '/assets/mockups/automation.svg', alt: 'Мокап автоматизации', title: 'AUTOMATION / 06', subtitle: 'Connected ecosystem' },
+  { src: '/assets/mockups/support.svg', alt: 'Мокап поддержки цифрового продукта', title: 'SUPPORT / 07', subtitle: 'Product care' },
+  { src: '/assets/mockups/hosting.svg', alt: 'Мокап хостинга и инфраструктуры', title: 'HOSTING / 08', subtitle: 'Cloud infrastructure' },
+  { src: '/assets/mockups/domain.svg', alt: 'Мокап домена и запуска проекта', title: 'DOMAIN / 09', subtitle: 'Launch & DNS' },
 ];
 
 const projects = [
@@ -107,8 +113,8 @@ export default function App() {
 
     <section id="showcase" className="mockup-showcase">
       <div className="section-head compact">
-        <div><p className="eyebrow">LIQUID GLASS SHOWCASE / 02</p><h2>Показываем<br/><span>как это может выглядеть.</span></h2></div>
-        <p className="section-note">Интерфейсы, устройства и цифровые системы представлены как живые объекты — с глубиной, бликами и стеклянными слоями.</p>
+        <div><p className="eyebrow">LIQUID GLASS SHOWCASE / 02</p><h2>Сайт. Приложение. Бот.<br/><span>Всё в одном пространстве.</span></h2></div>
+        <p className="section-note">От сайта и мобильного интерфейса до Telegram-бота, поддержки, хостинга и домена — показываем не отдельные экраны, а полный цифровой продукт.</p>
       </div>
       <div className="hero-carousel glass-panel">
         <FlexCarousel items={showcaseItems} preset="liquid" intro="rise" cardHeight={0.58} gap={14} radius={20} squeeze={0.2} focusOnClick captions captureWheel />
