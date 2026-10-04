@@ -139,20 +139,48 @@ export default function App() {
     </section>
 
     <section id="about" className="about">
-      <div className="about-intro">
+      <div className="about-topline">
         <p className="eyebrow">NEXUM CLOUD / 01</p>
-        <h2>Мы — digital-студия,<br/><span>которая собирает всё в одну систему.</span></h2>
+        <span>DESIGN · TECHNOLOGY · INTELLIGENCE</span>
       </div>
-      <div className="about-grid">
+      <div className="about-hero">
+        <div className="about-title">
+          <h2>Мы собираем<br/><em>цифровые продукты.</em></h2>
+        </div>
+        <div className="about-description">
+          <p>От первого экрана до работающей системы — дизайн, разработка, AI, данные и автоматизация соединяются в одном продукте.</p>
+          <div className="about-meta"><span>WEB</span><span>AI</span><span>3D</span><span>CRM</span><span>OPS</span></div>
+        </div>
+      </div>
+      <div className="about-carousel-wrap">
+        <div className="about-carousel-head">
+          <span>PRODUCT SYSTEM / 01—06</span>
+          <span>DRAG · SCROLL · EXPLORE</span>
+        </div>
+        <div className="about-carousel glass-panel">
+          <FlexCarousel
+            items={showcaseItems.slice(0, 6)}
+            preset="liquid"
+            intro="rise"
+            cardHeight={0.52}
+            gap={16}
+            radius={22}
+            squeeze={0.18}
+            focusOnClick
+            captions
+            captureWheel
+          />
+        </div>
+      </div>
+      <div className="about-bottom">
         <div className="about-number">01—04</div>
-        <p>Помогаем компаниям и предпринимателям превращать идеи в работающие цифровые продукты: от первого экрана и брендинга интерфейса до CRM, AI, интеграций и автоматизации.</p>
-        <p>Вместо набора разрозненных подрядчиков собираем единый цифровой слой — дизайн, frontend, визуализация в реальном времени, данные и бизнес-логику.</p>
-      </div>
-      <div className="about-stats">
-        <div><strong>WEB</strong><span>сайты и сервисы</span></div>
-        <div><strong>AI</strong><span>умные функции</span></div>
-        <div><strong>3D</strong><span>realtime experience</span></div>
-        <div><strong>OPS</strong><span>автоматизация</span></div>
+        <p>Не собираем сайт отдельно, CRM отдельно и AI отдельно. Проектируем единую цифровую среду, где интерфейс, данные и бизнес-логика работают вместе.</p>
+        <div className="about-stats">
+          <div><strong>WEB</strong><span>сайты и сервисы</span></div>
+          <div><strong>AI</strong><span>умные функции</span></div>
+          <div><strong>3D</strong><span>визуализация</span></div>
+          <div><strong>OPS</strong><span>автоматизация</span></div>
+        </div>
       </div>
     </section>
 
