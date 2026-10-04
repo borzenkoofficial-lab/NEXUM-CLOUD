@@ -1,6 +1,6 @@
 import { ArrowDown, ArrowUpRight, Bot, Database, Globe2, Layers3, Orbit, Sparkles, Smartphone, Workflow, Zap, Check } from 'lucide-react';
 import { AnimatePresence, motion, useScroll, useTransform, type Variants } from 'motion/react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
 import ExperienceSuite from './components/ExperienceSuite';
 import CommercialSuite from './components/CommercialSuite';
 import { submitLead } from './lib/lead';
@@ -86,7 +86,7 @@ const reveal: Variants = {
 function BriefForm({product}:{product?:typeof marketProducts[number]}){
   const [submitting,setSubmitting]=useState(false);
   const [result,setResult]=useState<{ok:boolean;message?:string;error?:string}|null>(null);
-  const handleSubmit=async(e:React.FormEvent<HTMLFormElement>)=>{
+  const handleSubmit=async(e:FormEvent<HTMLFormElement>)=>{
     e.preventDefault();
     setSubmitting(true);
     setResult(null);
