@@ -7,10 +7,10 @@ const FlexCarousel: any = RawFlexCarousel;
 
 const capabilities = [
   { n:'01', icon:Globe2, title:'Сайты и digital-продукты', text:'Промо-сайты, корпоративные платформы, сервисы и интерфейсы с собственной визуальной системой.' },
-  { n:'02', icon:Smartphone, title:'Мобильные интерфейсы', text:'Адаптивные продукты, mobile-first сценарии и интерфейсы, которые одинаково хорошо работают на любом экране.' },
+  { n:'02', icon:Smartphone, title:'Мобильные интерфейсы', text:'Адаптивные продукты, сценарии для мобильных устройств и интерфейсы, которые одинаково хорошо работают на любом экране.' },
   { n:'03', icon:Orbit, title:'3D, WebGL и motion', text:'Интерактивные сцены, realtime-графика, scroll-анимации, микровзаимодействия и визуальные эффекты.' },
-  { n:'04', icon:Bot, title:'AI и интеллектуальные функции', text:'AI-интерфейсы, ассистенты, автоматизация и умные сценарии, встроенные в реальный продукт.' },
-  { n:'05', icon:Database, title:'CRM и внутренние системы', text:'Кабинеты, CRM, панели управления, базы данных и цифровые рабочие пространства.' },
+  { n:'04', icon:Bot, title:'AI и интеллектуальные функции', text:'AI-интерфейсы, ассистенты, автоматизация и интеллектуальные сценарии, встроенные в реальный продукт.' },
+  { n:'05', icon:Database, title:'CRM и внутренние системы', text:'Личные кабинеты, CRM, панели управления, базы данных и цифровые рабочие пространства.' },
   { n:'06', icon:Workflow, title:'Интеграции и автоматизация', text:'Telegram, платежи, API, уведомления, внешние сервисы и бизнес-процессы в единой системе.' },
   { n:'07', icon:Sparkles, title:'Поддержка и развитие', text:'Техническая поддержка, обновления, аналитика, улучшения и сопровождение после запуска.' },
   { n:'08', icon:Layers3, title:'Хостинг и инфраструктура', text:'Размещение, SSL, CDN, резервные копии, мониторинг и стабильная работа проекта.' },
@@ -18,15 +18,15 @@ const capabilities = [
 ];
 
 const showcaseItems = [
-  { src: '/assets/mockups/web-product.svg', alt: 'Мокап сайта и цифрового продукта', title: 'WEB / 01', subtitle: 'Digital product' },
-  { src: '/assets/mockups/mobile-ui.svg', alt: 'Мокап мобильного интерфейса', title: 'MOBILE / 02', subtitle: 'Product UI' },
-  { src: '/assets/mockups/ai-interface.svg', alt: 'Мокап AI интерфейса', title: 'AI / 03', subtitle: 'Intelligent interface' },
-  { src: '/assets/mockups/telegram-bot.svg', alt: 'Мокап Telegram бота', title: 'BOT / 04', subtitle: 'Telegram automation' },
-  { src: '/assets/mockups/crm-system.svg', alt: 'Мокап CRM системы', title: 'CRM / 05', subtitle: 'Digital system' },
-  { src: '/assets/mockups/automation.svg', alt: 'Мокап автоматизации', title: 'AUTOMATION / 06', subtitle: 'Connected ecosystem' },
-  { src: '/assets/mockups/support.svg', alt: 'Мокап поддержки цифрового продукта', title: 'SUPPORT / 07', subtitle: 'Product care' },
-  { src: '/assets/mockups/hosting.svg', alt: 'Мокап хостинга и инфраструктуры', title: 'HOSTING / 08', subtitle: 'Cloud infrastructure' },
-  { src: '/assets/mockups/domain.svg', alt: 'Мокап домена и запуска проекта', title: 'DOMAIN / 09', subtitle: 'Launch & DNS' },
+  { src: '/assets/mockups/web-product.svg', alt: 'Мокап сайта и цифрового продукта', title: 'WEB / 01', subtitle: 'Цифровой продукт' },
+  { src: '/assets/mockups/mobile-ui.svg', alt: 'Мокап мобильного интерфейса', title: 'MOBILE / 02', subtitle: 'Интерфейс продукта' },
+  { src: '/assets/mockups/ai-interface.svg', alt: 'Мокап AI интерфейса', title: 'AI / 03', subtitle: 'Интеллектуальный интерфейс' },
+  { src: '/assets/mockups/telegram-bot.svg', alt: 'Мокап Telegram бота', title: 'BOT / 04', subtitle: 'Автоматизация Telegram' },
+  { src: '/assets/mockups/crm-system.svg', alt: 'Мокап CRM системы', title: 'CRM / 05', subtitle: 'Цифровая система' },
+  { src: '/assets/mockups/automation.svg', alt: 'Мокап автоматизации', title: 'AUTOMATION / 06', subtitle: 'Единая экосистема' },
+  { src: '/assets/mockups/support.svg', alt: 'Мокап поддержки цифрового продукта', title: 'SUPPORT / 07', subtitle: 'Поддержка продукта' },
+  { src: '/assets/mockups/hosting.svg', alt: 'Мокап хостинга и инфраструктуры', title: 'HOSTING / 08', subtitle: 'Облачная инфраструктура' },
+  { src: '/assets/mockups/domain.svg', alt: 'Мокап домена и запуска проекта', title: 'DOMAIN / 09', subtitle: 'Запуск и DNS' },
 ];
 
 const projects = [
@@ -146,7 +146,7 @@ export default function App() {
       <div className="about-grid">
         <div className="about-number">01—04</div>
         <p>Помогаем компаниям и предпринимателям превращать идеи в работающие цифровые продукты: от первого экрана и брендинга интерфейса до CRM, AI, интеграций и автоматизации.</p>
-        <p>Вместо набора разрозненных подрядчиков собираем единый цифровой слой — дизайн, frontend, realtime-визуал, данные и бизнес-логику.</p>
+        <p>Вместо набора разрозненных подрядчиков собираем единый цифровой слой — дизайн, frontend, визуализация в реальном времени, данные и бизнес-логику.</p>
       </div>
       <div className="about-stats">
         <div><strong>WEB</strong><span>сайты и сервисы</span></div>
