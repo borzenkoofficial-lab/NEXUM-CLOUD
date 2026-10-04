@@ -81,10 +81,21 @@ export default function App() {
     <section className="hero" ref={heroRef}>
       <motion.div className="hero-copy" style={{ y: heroY, opacity: heroOpacity }}>
         <motion.div initial="hidden" animate="show" variants={reveal}><p className="eyebrow">NEXUM CLOUD · DIGITAL STUDIO</p></motion.div>
-        <motion.h1 initial="hidden" animate="show" variants={reveal} transition={{ delay: .08 }}>Создаём<br/><em>цифровые продукты.</em></motion.h1>
-        <motion.p className="lead" initial="hidden" animate="show" variants={reveal} transition={{ delay: .16 }}>
-          Сайты, интерфейсы, мобильные продукты, 3D, AI и автоматизация. Не просто красивый экран — полноценная цифровая система вокруг вашего бизнеса.
-        </motion.p>
+        <motion.div className="nexum-brand-hero" initial="hidden" animate="show" variants={reveal}>
+          <div className="nexum-logo-mark"><span>N</span><i/><b/></div>
+          <div className="nexum-brand-wordmark">
+            <span>NEXUM</span><strong>CLOUD</strong>
+          </div>
+        </motion.div>
+        <motion.div className="hero-title-block" initial="hidden" animate="show" variants={reveal} transition={{ delay: .08 }}>
+          <h1>Digital systems<br/><em>with a human touch.</em></h1>
+          <p>Создаём сайты, цифровые продукты и интеллектуальные системы, объединяя дизайн, технологии и автоматизацию в одну среду.</p>
+        </motion.div>
+        <motion.div className="hero-info-grid" initial="hidden" animate="show" variants={reveal} transition={{ delay: .16 }}>
+          <div><span>01</span><b>DESIGN</b><small>UI / UX · BRAND</small></div>
+          <div><span>02</span><b>BUILD</b><small>WEB · MOBILE · 3D</small></div>
+          <div><span>03</span><b>INTELLIGENCE</b><small>AI · AUTOMATION</small></div>
+        </motion.div>
         <motion.div className="hero-actions" initial="hidden" animate="show" variants={reveal} transition={{ delay: .24 }}>
           <a className="primary glass-button" href="#showcase">Посмотреть возможности <ArrowDown size={17}/></a>
           <a className="secondary glass-button" href="#contact">Начать проект</a>
