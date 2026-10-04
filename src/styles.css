@@ -181,3 +181,29 @@ body:after{content:'';position:fixed;z-index:-1;inset:0;pointer-events:none;back
 .hero-info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:30px;max-width:650px}.hero-info-grid>div{position:relative;min-height:86px;padding:13px 14px;border:1px solid rgba(255,255,255,.82);border-radius:17px;background:linear-gradient(145deg,rgba(255,255,255,.7),rgba(226,239,255,.34));box-shadow:inset 0 1px rgba(255,255,255,.95),0 12px 30px rgba(70,90,130,.055);backdrop-filter:blur(18px) saturate(150%);-webkit-backdrop-filter:blur(18px) saturate(150%)}
 .hero-info-grid span{display:block;font-size:8px;letter-spacing:.14em;color:#8993a3}.hero-info-grid b{display:block;margin-top:14px;font:600 11px Manrope;letter-spacing:.08em;color:#303946}.hero-info-grid small{display:block;margin-top:3px;font-size:7px;letter-spacing:.08em;color:#8a94a3}
 @media(max-width:560px){.nexum-brand-hero{margin-bottom:22px}.nexum-logo-mark{width:50px;height:50px;flex-basis:50px;border-radius:15px}.nexum-logo-mark span{font-size:24px}.nexum-brand-wordmark span,.nexum-brand-wordmark strong{font-size:16px}.hero-title-block h1{font-size:49px}.hero-title-block p{font-size:15px}.hero-info-grid{grid-template-columns:1fr;margin-top:24px}.hero-info-grid>div{min-height:66px}.hero-info-grid b{margin-top:7px}}
+
+/* HERO CTA CONTRAST — primary action */
+.hero-actions .primary{
+  color:#fff;
+  background:linear-gradient(135deg,#2f5bea 0%,#243fba 52%,#18256f 100%);
+  border-color:rgba(255,255,255,.34);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.38),
+    inset 0 -1px rgba(0,0,0,.14),
+    0 10px 28px rgba(54,78,180,.24);
+  text-shadow:0 1px 2px rgba(0,0,0,.22);
+}
+.hero-actions .primary:before{
+  background:linear-gradient(110deg,rgba(255,255,255,.32),transparent 42%,rgba(255,255,255,.08));
+}
+.hero-actions .primary:hover{
+  background:linear-gradient(135deg,#3b67f4 0%,#2949cb 52%,#1d2d82 100%);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.48),
+    0 14px 36px rgba(54,78,180,.30);
+}
+.hero-actions .secondary{
+  color:#252b38;
+  background:rgba(255,255,255,.68);
+  border-color:rgba(100,120,160,.18);
+}
