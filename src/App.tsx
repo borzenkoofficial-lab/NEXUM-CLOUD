@@ -1,5 +1,5 @@
 import { ArrowDown, ArrowUpRight, Box, Bot, Layers3, Orbit, Sparkles, Workflow } from 'lucide-react';
-import { motion, useScroll, useTransform } from 'motion/react';
+import { motion, useScroll, useTransform, type Variants } from 'motion/react';
 import { useRef } from 'react';
 import { HeroScene } from './components/HeroScene';
 import RawFlexCarousel from './components/FlexCarousel/FlexCarousel';
@@ -30,7 +30,7 @@ const projects = [
   { label:'MARKETPLACE', title:'Gruzli', text:'Цифровая система для заказчиков, диспетчеров и грузчиков.' },
 ];
 
-const reveal = {
+const reveal: Variants = {
   hidden: { opacity: 0, y: 26 },
   show: { opacity: 1, y: 0, transition: { duration: .7, ease: [0.22, 1, 0.36, 1] } }
 };
