@@ -3,6 +3,7 @@ import { AnimatePresence, motion, useScroll, useTransform, type Variants } from 
 import { useEffect, useState } from 'react';
 import ExperienceSuite from './components/ExperienceSuite';
 import CommercialSuite from './components/CommercialSuite';
+import { submitLead } from './lib/lead';
 
 
 function NexumWelcome(){
@@ -83,13 +84,27 @@ const reveal: Variants = {
 };
 
 function BriefForm({product}:{product?:typeof marketProducts[number]}){
-  return <form className="brief-form" onSubmit={(e)=>{
+  const [submitting,setSubmitting]=useState(false);
+  const [result,setResult]=useState<{ok:boolean;message?:string;error?:string}|null>(null);
+  const handleSubmit=async(e:React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault();
+    setSubmitting(true);
+    setResult(null);
     const data=new FormData(e.currentTarget);
-    const subject=encodeURIComponent(product ? `Заявка: ${product.title}` : 'Заявка в NEXUM CLOUD');
-    const body=encodeURIComponent(Array.from(data.entries()).map(([k,v])=>`${k}: ${v}`).join('\\n'));
-    window.location.href=`mailto:hello@nexum.cloud?subject=${subject}&body=${body}`;
-  }}>
+    const response=await submitLead({
+      name:String(data.get('Имя')||''),
+      contact:String(data.get('Контакт')||''),
+      service:product?.title || 'Консультация / digital-проект',
+      budget:String(data.get('Бюджет')||'Не указан'),
+      deadline:String(data.get('Срок')||'Не указан'),
+      task:String(data.get('Задача')||''),
+      source:window.location.pathname
+    });
+    setResult(response);
+    setSubmitting(false);
+    if(response.ok) e.currentTarget.reset();
+  };
+  return <form className="brief-form" onSubmit={handleSubmit}>
     <div className="brief-form-head"><div><p className="eyebrow">QUICK BRIEF</p><h3>{product ? 'Заказать продукт.' : 'Не нашли нужное?'}</h3></div><span>01—04</span></div>
     <div className="brief-form-grid">
       <label><span>Имя</span><input name="Имя" required placeholder="Как к вам обращаться?" /></label>
@@ -98,7 +113,8 @@ function BriefForm({product}:{product?:typeof marketProducts[number]}){
       <label><span>Срок</span><select name="Срок" defaultValue=""><option value="" disabled>Когда нужен запуск?</option><option>Как можно скорее</option><option>2–4 недели</option><option>1–2 месяца</option><option>Срок не критичен</option></select></label>
       <label className="brief-form-wide"><span>Задача</span><textarea name="Задача" rows={4} placeholder={product ? 'Коротко опишите, что хотите получить…' : 'Что нужно сделать или улучшить?'} /></label>
     </div>
-    <button className="brief-submit" type="submit">Получить расчёт <ArrowUpRight size={17}/></button>
+    <button className="brief-submit" type="submit" disabled={submitting}>{submitting?'Отправляем…':'Получить расчёт'} <ArrowUpRight size={17}/></button>
+    {result&&<p className="brief-submit-status" aria-live="polite">{result.ok?'✓ Заявка отправлена. Мы свяжемся с вами напрямую.':'⚠ '+result.error}</p>}
   </form>
 }
 function MarketPage(){
@@ -361,7 +377,7 @@ export default function App(){
 
     <footer id="contact" className="footer-v2">
       <div className="footer-v2-main"><p className="eyebrow">09 / START A PROJECT</p><h2>Расскажите,<br/><em>что хотите изменить.</em></h2><p>Сайт, цифровой продукт, AI, CRM или новая digital-система.</p></div>
-      <div className="footer-v2-action"><a className="footer-big-cta" href="mailto:hello@nexum.cloud">Начать разговор <ArrowUpRight size={22}/></a><div className="footer-mini"><span>HELLO@NEXUM.CLOUD</span><span>© 2026 NEXUM CLOUD</span></div></div>
+      <div className="footer-v2-action"><a className="footer-big-cta" href="#brief">Начать разговор <ArrowUpRight size={22}/></a><div className="footer-mini"><span>HELLO@NEXUM.CLOUD</span><span>© 2026 NEXUM CLOUD</span></div></div>
     </footer>
   </main>;
 }
