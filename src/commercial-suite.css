@@ -41,3 +41,10 @@
 @media(max-width:900px){.commercial-section{width:min(100% - 36px,720px);padding:88px 0}.commercial-head,.brief-shell-pro,.client-portal-pro{grid-template-columns:1fr;gap:35px}.service-grid,.case-grid-pro{grid-template-columns:1fr 1fr}.process-track-pro{grid-template-columns:repeat(3,1fr);row-gap:25px}.integration-cloud{grid-template-columns:repeat(3,1fr)}.care-grid-pro{grid-template-columns:1fr}.brief-shell-pro{padding:35px}.trust-strip{grid-template-columns:1fr 1fr}.trust-strip div:nth-child(2){border-right:0}.trust-strip div{border-bottom:1px solid rgba(130,148,177,.12)}}
 @media(max-width:620px){.commercial-section{width:calc(100% - 28px);padding:68px 0}.commercial-head h2,.brief-intro h2,.client-portal-pro h2,.contact-pro h2{font-size:43px}.service-grid,.case-grid-pro,.brief-options{grid-template-columns:1fr}.service-card-pro{min-height:255px}.service-card-pro h3{margin-top:35px}.case-window{height:205px}.process-track-pro{grid-template-columns:1fr 1fr}.integration-cloud{grid-template-columns:1fr 1fr}.brief-shell-pro{padding:22px;border-radius:26px}.brief-card-pro{padding:20px;min-height:390px}.brief-question{font-size:24px}.trust-strip{grid-template-columns:1fr}.trust-strip div{border-right:0}.contact-pro{padding:95px 0}.portal-preview{padding:14px}.portal-row b{margin-left:10px}.portal-modal-card{padding:30px 22px}}
 @media(prefers-reduced-motion:reduce){.service-card-pro,.case-card-pro{transition:none}}
+
+.brief-contact-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0 12px}
+.brief-contact-fields input{width:100%;box-sizing:border-box;border:1px solid rgba(18,32,56,.12);background:rgba(255,255,255,.72);border-radius:16px;padding:14px 16px;font:inherit;color:inherit;outline:none}
+.brief-contact-fields input:focus{border-color:rgba(41,103,190,.42);box-shadow:0 0 0 4px rgba(74,133,210,.08)}
+.brief-submit:disabled{opacity:.55;cursor:wait}
+.brief-submit-status{margin:12px 0 0;font-size:13px;line-height:1.5;color:rgba(18,32,56,.72)}
+@media (max-width:620px){.brief-contact-fields{grid-template-columns:1fr}}
