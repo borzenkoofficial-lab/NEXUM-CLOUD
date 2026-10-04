@@ -158,18 +158,19 @@ export default function App() {
           <span>DRAG · SCROLL · EXPLORE</span>
         </div>
         <div className="about-carousel glass-panel">
-          <FlexCarousel
-            items={showcaseItems.slice(0, 6)}
-            preset="liquid"
-            intro="rise"
-            cardHeight={0.52}
-            gap={16}
-            radius={22}
-            squeeze={0.18}
-            focusOnClick
-            captions
-            captureWheel
-          />
+          <div className="about-native-track">
+            {showcaseItems.slice(0, 6).map((item, index) => (
+              <article className="about-native-card" key={item.src}>
+                <div className="about-native-image">
+                  <img src={item.src} alt={item.alt} loading={index === 0 ? 'eager' : 'lazy'} />
+                </div>
+                <div className="about-native-caption">
+                  <span>{item.title}</span>
+                  <small>{item.subtitle}</small>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
       <div className="about-bottom">
