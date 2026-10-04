@@ -3,6 +3,32 @@ import { AnimatePresence, motion, useScroll, useTransform, type Variants } from 
 import { useEffect, useState } from 'react';
 import ExperienceSuite from './components/ExperienceSuite';
 
+
+function NexumWelcome(){
+  const [visible,setVisible]=useState(true);
+  const [leaving,setLeaving]=useState(false);
+  useEffect(()=>{
+    const timer=window.setTimeout(()=>setLeaving(true),2200);
+    const done=window.setTimeout(()=>setVisible(false),3000);
+    return()=>{window.clearTimeout(timer);window.clearTimeout(done)};
+  },[]);
+  if(!visible) return null;
+  return <AnimatePresence>
+    {!leaving&&<motion.div className="nxc-welcome" aria-label="NEXUM CLOUD">
+      <motion.div className="nxc-welcome-noise" initial={{opacity:0}} animate={{opacity:1}} transition={{duration:.8}}/>
+      <motion.div className="nxc-welcome-line nxc-welcome-line-top" initial={{scaleX:0}} animate={{scaleX:1}} transition={{duration:1.2,ease:[.22,.8,.2,1]}}/>
+      <motion.div className="nxc-welcome-content">
+        <motion.div className="nxc-welcome-mark" initial={{opacity:0,scale:.72,rotate:-12}} animate={{opacity:1,scale:1,rotate:0}} transition={{duration:.9,delay:.15,ease:[.22,.8,.2,1]}}><span>N</span><small>NX</small></motion.div>
+        <motion.p className="nxc-welcome-kicker" initial={{opacity:0,y:12}} animate={{opacity:1,y:0}} transition={{delay:.45,duration:.6}}>NEXUM CLOUD · DIGITAL STUDIO</motion.p>
+        <motion.h2 initial={{opacity:0,y:18}} animate={{opacity:1,y:0}} transition={{delay:.58,duration:.7}}>Создаём<br/><em>цифровые системы.</em></motion.h2>
+        <motion.div className="nxc-welcome-meta" initial={{opacity:0}} animate={{opacity:1}} transition={{delay:.9,duration:.7}}><span>WEB</span><i/><span>AI</span><i/><span>3D</span><i/><span>AUTOMATION</span></motion.div>
+      </motion.div>
+      <motion.div className="nxc-welcome-progress" initial={{scaleX:0}} animate={{scaleX:1}} transition={{duration:2.15,ease:"linear"}}/>
+      <motion.div className="nxc-welcome-enter" initial={{opacity:0}} animate={{opacity:1}} transition={{delay:1.35,duration:.5}}><span>WELCOME</span><b>2026</b></motion.div>
+    </motion.div>}
+  </AnimatePresence>;
+}
+
 const capabilities = [
   { n:'01', icon:Globe2, title:'Сайты и digital-продукты', text:'Имиджевые сайты, сервисы и продуктовые интерфейсы, которые выглядят дорого и ведут пользователя к действию.' },
   { n:'02', icon:Smartphone, title:'Мобильные интерфейсы', text:'Адаптивные сценарии и мобильные продукты без компромиссов по UX и визуальной системе.' },
@@ -175,6 +201,7 @@ function ProductPage({product}:{product:typeof marketProducts[number]}){
 }
 
 export default function App(){
+  <NexumWelcome />
   const { scrollYProgress } = useScroll();
   const heroY = useTransform(scrollYProgress,[0,.2],[0,-80]);
   const heroOpacity = useTransform(scrollYProgress,[0,.18],[1,.2]);
