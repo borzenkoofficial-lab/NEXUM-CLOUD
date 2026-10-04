@@ -112,3 +112,42 @@ radial-gradient(300px 220px at 84% 72%,rgba(190,125,255,.17),transparent 72%);po
   .showcase-hint{bottom:13px;font-size:6px}.showcase-hint i{width:20px}
 }
 @media(prefers-reduced-motion:reduce){.showcase-glow{animation:none}}
+
+/* Market */
+.market-page,.product-page{min-height:100vh;background:transparent}
+.market-hero{max-width:1240px;margin:0 auto;padding:170px 32px 80px}
+.market-hero h1{margin:18px 0 20px;font:500 clamp(52px,7vw,104px)/.94 Manrope,sans-serif;letter-spacing:-.065em;color:#202735}
+.market-hero h1 em,.product-details h2 em,.product-cta h2 em{font-style:normal;color:#77849a}
+.market-hero>p:last-child{max-width:590px;margin:0;color:#778396;font-size:16px;line-height:1.65}
+.market-grid{max-width:1240px;margin:0 auto;padding:0 32px 130px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.market-card{display:flex;flex-direction:column;min-width:0;border:1px solid rgba(255,255,255,.9);border-radius:30px;overflow:hidden;background:rgba(255,255,255,.5);box-shadow:0 25px 70px rgba(55,70,105,.09),inset 0 1px rgba(255,255,255,.95);transition:box-shadow .35s ease;text-decoration:none}
+.market-card:hover{box-shadow:0 35px 90px rgba(55,70,105,.16),inset 0 1px #fff}
+.market-card-visual{height:300px;position:relative;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 50% 45%,#fff,#edf2fa 70%,#e7e2f3)}
+.market-card-visual img{width:86%;height:86%;object-fit:contain;transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.market-card:hover .market-card-visual img{transform:scale(1.045) translateY(-4px)}
+.market-card-visual>span{position:absolute;top:15px;left:15px;padding:7px 10px;border:1px solid rgba(255,255,255,.9);border-radius:99px;background:rgba(255,255,255,.68);backdrop-filter:blur(14px);font-size:8px;letter-spacing:.13em;color:#65718a}
+.market-card-info{padding:22px 22px 20px;display:flex;flex:1;flex-direction:column;justify-content:space-between;gap:28px}
+.market-card-info small{color:#9aa4b4;font-size:9px;letter-spacing:.12em}
+.market-card-info h2{margin:7px 0 8px;font:600 21px/1.15 Manrope,sans-serif;letter-spacing:-.035em;color:#273143}
+.market-card-info p{margin:0;color:#7e899a;font-size:12px;line-height:1.55}
+.market-card-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:17px;border-top:1px solid rgba(100,120,155,.1)}
+.market-card-bottom b{font:600 13px Manrope;color:#3e4d67}
+.market-card-bottom span{width:35px;height:35px;display:grid;place-items:center;border-radius:50%;background:#f7f9fc;border:1px solid rgba(120,140,175,.12);color:#536cd1}
+.footer-v2{display:flex;justify-content:space-between;align-items:center;gap:30px;padding:45px max(32px,calc((100vw - 1240px)/2));color:#68758a}
+.product-hero{max-width:1240px;margin:0 auto;padding:160px 32px 90px;display:grid;grid-template-columns:.8fr 1.2fr;gap:70px;align-items:center}
+.product-copy{display:flex;flex-direction:column;align-items:flex-start}
+.product-back{font-size:11px;color:#77849a;margin-bottom:60px}
+.product-copy h1{margin:15px 0 20px;font:500 clamp(48px,6vw,84px)/.95 Manrope,sans-serif;letter-spacing:-.06em;color:#222b3a}
+.product-copy>p:not(.eyebrow):not(.product-back){max-width:500px;color:#7b8799;font-size:16px;line-height:1.65;margin:0 0 24px}
+.product-copy>strong{font:600 18px Manrope;color:#42516b;margin-bottom:28px}
+.product-mockup{min-height:570px;border-radius:38px;display:grid;place-items:center;padding:45px;background:radial-gradient(circle at 50% 48%,#fff,#e9eff9 62%,#e5e0f2);border:1px solid rgba(255,255,255,.92);box-shadow:0 35px 100px rgba(52,70,110,.14),inset 0 1px #fff}
+.product-mockup img{width:100%;height:100%;max-height:500px;object-fit:contain;filter:drop-shadow(0 28px 30px rgba(53,69,105,.16))}
+.product-details{max-width:1240px;margin:0 auto;padding:80px 32px 130px;display:grid;grid-template-columns:1fr 1fr;gap:90px}
+.product-details h2,.product-cta h2{margin:15px 0;font:500 clamp(40px,5vw,66px)/.98 Manrope;letter-spacing:-.055em;color:#263043}
+.product-features{border-top:1px solid rgba(100,120,155,.14)}
+.product-features div{display:grid;grid-template-columns:40px 1fr 20px;gap:15px;align-items:center;padding:22px 0;border-bottom:1px solid rgba(100,120,155,.14);color:#53617a}
+.product-features span{font-size:9px;color:#9aa5b5;letter-spacing:.1em}.product-features b{font:500 14px Manrope}.product-features svg{color:#7186dd}
+.product-cta{max-width:1240px;margin:0 auto 90px;padding:90px 70px;border-radius:40px;text-align:center;background:radial-gradient(circle at 50% 20%,rgba(255,255,255,.95),rgba(227,235,250,.75) 55%,rgba(232,223,246,.7));border:1px solid rgba(255,255,255,.9);box-shadow:0 30px 90px rgba(55,70,105,.1)}
+.product-cta .primary{display:inline-flex;margin-top:18px}
+@media(max-width:900px){.market-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.product-hero{grid-template-columns:1fr;gap:40px}.product-details{grid-template-columns:1fr;gap:45px}.product-mockup{min-height:420px}}
+@media(max-width:620px){.market-hero{padding:130px 20px 55px}.market-grid{grid-template-columns:1fr;padding:0 20px 80px;gap:16px}.market-card-visual{height:260px}.footer-v2{padding:35px 20px;align-items:flex-start;flex-direction:column}.product-hero{padding:125px 20px 55px}.product-back{margin-bottom:40px}.product-mockup{min-height:330px;padding:25px;border-radius:28px}.product-details{padding:50px 20px 80px}.product-cta{margin:0 20px 60px;padding:55px 25px;border-radius:30px}}
