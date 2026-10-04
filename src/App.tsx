@@ -158,18 +158,30 @@ export default function App() {
           <span>DRAG · SCROLL · EXPLORE</span>
         </div>
         <div className="about-carousel glass-panel">
-          <div className="about-native-track">
-            {showcaseItems.slice(0, 6).map((item, index) => (
-              <article className="about-native-card" key={item.src}>
-                <div className="about-native-image">
-                  <img src={item.src} alt={item.alt} loading={index === 0 ? 'eager' : 'lazy'} />
-                </div>
-                <div className="about-native-caption">
-                  <span>{item.title}</span>
-                  <small>{item.subtitle}</small>
-                </div>
-              </article>
-            ))}
+          <div className="about-native-carousel">
+            <button className="about-carousel-control prev" type="button" aria-label="Предыдущий мокап"
+              onClick={() => {
+                const track = document.querySelector('.about-native-track') as HTMLElement | null;
+                track?.scrollBy({ left: -(track.clientWidth * 0.78), behavior: 'smooth' });
+              }}>‹</button>
+            <div className="about-native-track">
+              {showcaseItems.slice(0, 6).map((item, index) => (
+                <article className="about-native-card" key={item.src}>
+                  <div className="about-native-image">
+                    <img src={item.src} alt={item.alt} loading={index === 0 ? 'eager' : 'lazy'} />
+                  </div>
+                  <div className="about-native-caption">
+                    <span>{item.title}</span>
+                    <small>{item.subtitle}</small>
+                  </div>
+                </article>
+              ))}
+            </div>
+            <button className="about-carousel-control next" type="button" aria-label="Следующий мокап"
+              onClick={() => {
+                const track = document.querySelector('.about-native-track') as HTMLElement | null;
+                track?.scrollBy({ left: track.clientWidth * 0.78, behavior: 'smooth' });
+              }}>›</button>
           </div>
         </div>
       </div>
