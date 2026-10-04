@@ -92,19 +92,29 @@ function MarketPage(){
   return <main className="market-page">
     <nav className="nav"><a className="brand" href="/"><span className="brand-mark">N</span><span>NEXUM CLOUD</span></a><div className="nav-links"><a href="/">Студия</a><a className="active" href="/market">Маркет</a><a href="/#projects">Проекты</a></div><a className="nav-cta glass-button" href="#market-config">Собрать проект <ArrowUpRight size={15}/></a></nav>
 
-    <section className="market-hero market-hero-store" aria-label="NEXUM Cloud Market">
-      <div className="market-hero-scene">
-        <div className="market-flow">
-          <div className="market-node market-node-buy"><span>+</span><b>BUY</b></div>
-          <div className="market-node market-node-pay"><span>◈</span><b>PAY</b></div>
-          <div className="market-node market-node-add"><span>↗</span><b>ADD</b></div>
-          <div className="market-node market-node-out"><span>−</span><b>OUT</b></div>
-          <div className="market-core"><span>N</span><i></i></div>
-          <div className="market-particle particle-one"></div><div className="market-particle particle-two"></div><div className="market-particle particle-three"></div>
+    <section className="market-hero market-hero-store market-hero-v3" aria-label="NEXUM Cloud Market">
+      <div className="market-hero-v3-shell">
+        <div className="market-hero-v3-top"><span>NEXUM MARKET</span><b>01 / DIGITAL STORE</b></div>
+        <div className="market-store-stage" onPointerMove={(e)=>{
+          const r=e.currentTarget.getBoundingClientRect();
+          e.currentTarget.style.setProperty('--mx',`${((e.clientX-r.left)/r.width-.5)*14}deg`);
+          e.currentTarget.style.setProperty('--my',`${-((e.clientY-r.top)/r.height-.5)*10}deg`);
+        }} onPointerLeave={(e)=>{e.currentTarget.style.setProperty('--mx','0deg');e.currentTarget.style.setProperty('--my','0deg')}}>
+          <div className="store-product store-product-back store-product-ai"><span>AI</span><b>ASSISTANT</b></div>
+          <div className="store-product store-product-back store-product-crm"><span>CRM</span><b>SYSTEM</b></div>
+          <div className="store-product store-product-main">
+            <div className="store-screen"><div className="screen-top"><i></i><i></i><i></i><b>nexum.cloud</b></div><div className="screen-content"><small>WEB / DIGITAL PRODUCT</small><strong>Build something<br/><em>worth using.</em></strong><div className="screen-lines"><i></i><i></i><i></i></div></div></div>
+            <div className="product-meta"><span>01 / WEB</span><b>Digital website</b><strong>49 000 ₽</strong></div>
+          </div>
+          <div className="store-product store-product-front store-product-mobile"><span>MOBILE</span><b>INTERFACE</b></div>
+          <div className="store-product store-product-front store-product-telegram"><span>TELEGRAM</span><b>BOT</b></div>
+          <div className="store-orbit store-orbit-a"></div><div className="store-orbit store-orbit-b"></div>
+          <div className="store-particle sp-a"></div><div className="store-particle sp-b"></div><div className="store-particle sp-c"></div>
         </div>
-        <div className="market-wallet"><div className="wallet-top"><span>NEXUM WALLET</span><b>•••• 2481</b></div><strong>₽ 128 400</strong><small>AVAILABLE BALANCE</small><div className="wallet-bars"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
-        <div className="market-transaction"><span className="tx-dot"></span><div><b>Digital product</b><small>Payment completed</small></div><strong>+ ₽49 000</strong></div>
-        <div className="market-hero-label"><span>NEXUM MARKET</span><b>BUY · BUILD · LAUNCH</b></div>
+        <div className="store-wallet-v3"><div><span>NEXUM WALLET</span><b>•••• 2481</b></div><strong>₽ 128 400</strong><small>AVAILABLE BALANCE</small><i><em></em><em></em><em></em><em></em><em></em></i></div>
+        <div className="store-purchase-flow"><span className="flow-status"></span><div><b>Purchase complete</b><small>WEB / Digital product</small></div><strong>− ₽49 000</strong></div>
+        <div className="store-ready"><span>READY</span><b>YOUR PRODUCT</b><small>READY TO LAUNCH</small></div>
+        <div className="store-demo-progress"><span>LIVE DEMO</span><i><em></em></i><b>BUILDING → READY</b></div>
       </div>
     </section>
 
