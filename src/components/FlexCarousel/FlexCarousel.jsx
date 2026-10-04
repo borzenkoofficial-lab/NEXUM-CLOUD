@@ -480,7 +480,6 @@ const FlexCarousel = ({
         dispose: () => {}
       };
       const image = new Image();
-      image.crossOrigin = 'anonymous';
       image.decoding = 'async';
       image.onload = () => {
         if (!alive || !slots.includes(slot)) return;
@@ -517,10 +516,27 @@ const FlexCarousel = ({
         dirty = true;
         start();
       };
-      image.src = item.src;
+      let objectUrl = '';
+      fetch(item.src, { cache: 'force-cache' })
+        .then(response => {
+          if (!response.ok) throw new Error(`Failed to load image: ${response.status}`);
+          return response.blob();
+        })
+        .then(blob => {
+          if (!alive || !slots.includes(slot)) return;
+          objectUrl = URL.createObjectURL(blob);
+          image.src = objectUrl;
+        })
+        .catch(() => {
+          if (!alive) return;
+          slot.failed = true;
+          dirty = true;
+          start();
+        });
       slot.dispose = () => {
         image.onload = null;
         image.onerror = null;
+        if (objectUrl) URL.revokeObjectURL(objectUrl);
         gl.deleteTexture(texture.texture);
       };
       return slot;
