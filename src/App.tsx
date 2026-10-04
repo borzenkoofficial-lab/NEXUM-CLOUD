@@ -1,7 +1,7 @@
 import { ArrowDown, ArrowUpRight, Bot, Database, Globe2, Layers3, Orbit, Sparkles, Smartphone, Workflow, Zap, Check } from 'lucide-react';
 import { AnimatePresence, motion, useScroll, useTransform, type Variants } from 'motion/react';
 import { useEffect, useState } from 'react';
-import GlassSurface from './components/GlassSurface';
+import ExperienceSuite from './components/ExperienceSuite';
 
 const capabilities = [
   { n:'01', icon:Globe2, title:'Сайты и digital-продукты', text:'Имиджевые сайты, сервисы и продуктовые интерфейсы, которые выглядят дорого и ведут пользователя к действию.' },
@@ -317,6 +317,8 @@ export default function App(){
       <div className="lab-v2-copy"><p className="eyebrow">06 / NEXUM LAB</p><h2>Когда обычного<br/>экрана <em>мало.</em></h2><p>3D, WebGL, motion и интерактивные сцены превращают сайт в опыт. Используем их только там, где они усиливают историю.</p><div><span>THREE.JS</span><span>WEBGL</span><span>MOTION</span><span>SHADERS</span></div></div>
       <div className="lab-v2-console"><span><i/> REALTIME</span><b>01</b><small>INTERACTIVE EXPERIENCE</small></div>
     </section>
+
+    <ExperienceSuite />
 
     <section id="projects" className="projects-v2">
       <div className="section-head-v2"><div><p className="eyebrow">07 / SELECTED WORK</p><h2>То, что мы<br/><em>строим сами.</em></h2></div><p>Nexum — не только студия. Мы постоянно создаём собственные продукты и проверяем технологии на себе.</p></div>
