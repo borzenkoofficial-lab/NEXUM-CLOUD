@@ -54,9 +54,17 @@ export default function GlassSurface({
   };
   const update=()=>feImageRef.current?.setAttribute('href',generateDisplacementMap());
 
-  useEffect(()=>{update();[
-    [redChannelRef,redOffset],[greenChannelRef,greenOffset],[blueChannelRef,blueOffset]
-  ].forEach(([ref,offset])=>{if(ref.current){ref.current.setAttribute('scale',String(distortionScale+Number(offset)));ref.current.setAttribute('xChannelSelector',xChannel);ref.current.setAttribute('yChannelSelector',yChannel)}});
+  useEffect(()=>{update();
+    const channels: Array<[React.RefObject<SVGFEDisplacementMapElement | null>, number]> = [
+      [redChannelRef, redOffset],
+      [greenChannelRef, greenOffset],
+      [blueChannelRef, blueOffset],
+    ];
+    channels.forEach(([ref,offset])=>{
+      ref.current?.setAttribute('scale',String(distortionScale+offset));
+      ref.current?.setAttribute('xChannelSelector',xChannel);
+      ref.current?.setAttribute('yChannelSelector',yChannel);
+    });
     gaussianBlurRef.current?.setAttribute('stdDeviation',String(displace));
   },[borderWidth,borderRadius,brightness,opacity,blur,displace,distortionScale,redOffset,greenOffset,blueOffset,xChannel,yChannel,mixBlendMode,width,height]);
 
@@ -70,8 +78,8 @@ export default function GlassSurface({
     <svg className="glass-surface__filter" xmlns="http://www.w3.org/2000/svg"><defs><filter id={filterId} colorInterpolationFilters="sRGB" x="0%" y="0%" width="100%" height="100%">
       <feImage ref={feImageRef} x="0" y="0" width="100%" height="100%" preserveAspectRatio="none" result="map"/>
       <feDisplacementMap ref={redChannelRef} in="SourceGraphic" in2="map" result="dispRed"/><feColorMatrix in="dispRed" type="matrix" values="1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0" result="red"/>
-      <feDisplacementMap ref={greenChannelRef} in="SourceGraphic" in2="map" result="dispGreen"/><feColorMatrix in="dispGreen" type="matrix" values="0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0" result="green"/>
-      <feDisplacementMap ref={blueChannelRef} in="SourceGraphic" in2="map" result="dispBlue"/><feColorMatrix in="dispBlue" type="matrix" values="0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 0" result="blue"/>
+      <feDisplacementMap ref={greenChannelRef} in="SourceGraphic" in2="map" result="dispGreen"/><feColorMatrix in="dispGreen" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0" result="green"/>
+      <feDisplacementMap ref={blueChannelRef} in="SourceGraphic" in2="map" result="dispBlue"/><feColorMatrix in="dispBlue" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0" result="blue"/>
       <feBlend in="red" in2="green" mode="screen" result="rg"/><feBlend in="rg" in2="blue" mode="screen" result="output"/><feGaussianBlur ref={gaussianBlurRef} in="output" stdDeviation="0.7"/>
     </filter></defs></svg>
     <div className="glass-surface__content">{children}</div>
