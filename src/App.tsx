@@ -62,13 +62,13 @@ export default function App(){
   return <main>
     <motion.div className="scroll-progress" style={{scaleX:scrollYProgress}} />
 
-    <GlassSurface width="auto" className="nav" borderRadius={22} borderWidth={0.11} brightness={58} opacity={0.92} blur={10} displace={0.8} backgroundOpacity={0.12} saturation={1.25} distortionScale={-145} redOffset={0} greenOffset={8} blueOffset={16} mixBlendMode="difference">
+    <nav className="nav">
       <a className="brand" href="#"><span className="brand-mark">N</span><span>NEXUM CLOUD</span></a>
       <div className="nav-links">
         <a href="#about">Студия</a><a href="#showcase">Витрина</a><a href="#services">Услуги</a><a href="#projects">Проекты</a>
       </div>
       <a className="nav-cta glass-button" href="#contact">Обсудить проект <ArrowUpRight size={15}/></a>
-    </GlassSurface>
+    </nav>
 
     <section className="hero hero-v2">
       <motion.div className="hero-copy" style={{y:heroY,opacity:heroOpacity}}>
