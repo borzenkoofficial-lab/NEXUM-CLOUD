@@ -54,9 +54,17 @@ export default function GlassSurface({
   };
   const update=()=>feImageRef.current?.setAttribute('href',generateDisplacementMap());
 
-  useEffect(()=>{update();[
-    [redChannelRef,redOffset],[greenChannelRef,greenOffset],[blueChannelRef,blueOffset]
-  ].forEach(([ref,offset])=>{if(ref.current){ref.current.setAttribute('scale',String(distortionScale+Number(offset)));ref.current.setAttribute('xChannelSelector',xChannel);ref.current.setAttribute('yChannelSelector',yChannel)}});
+  useEffect(()=>{update();
+    const channels: Array<[React.RefObject<SVGFEDisplacementMapElement | null>, number]> = [
+      [redChannelRef, redOffset],
+      [greenChannelRef, greenOffset],
+      [blueChannelRef, blueOffset],
+    ];
+    channels.forEach(([ref, offset])=>{
+      ref.current?.setAttribute('scale',String(distortionScale+offset));
+      ref.current?.setAttribute('xChannelSelector',xChannel);
+      ref.current?.setAttribute('yChannelSelector',yChannel);
+    });
     gaussianBlurRef.current?.setAttribute('stdDeviation',String(displace));
   },[borderWidth,borderRadius,brightness,opacity,blur,displace,distortionScale,redOffset,greenOffset,blueOffset,xChannel,yChannel,mixBlendMode,width,height]);
 
