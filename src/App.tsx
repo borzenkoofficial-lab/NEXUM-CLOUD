@@ -138,6 +138,54 @@ export default function App() {
       </motion.div>
     </section>
 
+    <section className="impact-layer" aria-label="Nexum Cloud capabilities">
+      <div className="impact-top">
+        <span>DESIGN SYSTEM / 2026</span>
+        <span>SCROLL TO EXPLORE</span>
+      </div>
+      <div className="impact-intro">
+        <p className="eyebrow">НЕ ПРОСТО САЙТ</p>
+        <h2>Создаём впечатление,<br/><em>которое превращается в действие.</em></h2>
+      </div>
+      <div className="impact-grid">
+        <article className="impact-card impact-card-main">
+          <div className="impact-card-glow" />
+          <div className="impact-card-orbit" />
+          <div className="impact-card-copy">
+            <span>01 / EXPERIENCE</span>
+            <strong>Первый экран<br/>продаёт идею.</strong>
+            <p>Сильная композиция, движение и продуктовый сценарий вместо обычного шаблона.</p>
+          </div>
+          <div className="impact-ui">
+            <span className="impact-ui-dot" />
+            <span>LIVE EXPERIENCE</span>
+            <i />
+          </div>
+        </article>
+        <article className="impact-card">
+          <div className="impact-mini-number">02</div>
+          <div className="impact-lines"><i/><i/><i/><i/></div>
+          <div className="impact-card-copy">
+            <span>02 / SYSTEM</span>
+            <strong>Красивый интерфейс<br/>+ реальная логика.</strong>
+            <p>CRM, AI, Telegram, платежи, данные и автоматизация соединяются в одной системе.</p>
+          </div>
+        </article>
+        <article className="impact-card impact-card-dark">
+          <div className="impact-mini-label">NEXUM / MOTION</div>
+          <div className="impact-word">MOVE<span>.</span></div>
+          <div className="impact-card-copy">
+            <span>03 / MOTION</span>
+            <strong>Каждое движение<br/>имеет смысл.</strong>
+            <p>Микроанимации и 3D направляют внимание, а не мешают пользоваться сайтом.</p>
+          </div>
+        </article>
+      </div>
+      <div className="impact-marquee" aria-hidden="true">
+        <span>WEB</span><b>✦</b><span>AI</span><b>✦</b><span>3D</span><b>✦</b><span>CRM</span><b>✦</b><span>AUTOMATION</span><b>✦</b><span>WEB</span><b>✦</b><span>AI</span><b>✦</b><span>3D</span>
+      </div>
+    </section>
+
     <section id="about" className="about">
       <div className="about-topline">
         <p className="eyebrow">NEXUM CLOUD / 01</p>
