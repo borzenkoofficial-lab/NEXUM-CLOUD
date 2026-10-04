@@ -12,6 +12,19 @@ const capabilities = [
   { n:'06', icon:Layers3, title:'Инфраструктура и запуск', text:'Домен, DNS, SSL, хостинг, аналитика и поддержка — доводим продукт до работающего состояния.' },
 ];
 
+const marketProducts = [
+  {slug:'site',tag:'WEB',title:'Сайт / digital-продукт',text:'Премиальный сайт или цифровой сервис с дизайном, адаптивом и готовностью к запуску.',src:'/assets/mockups/web-product.svg',price:'от 49 000 ₽',features:['UX/UI-дизайн','Адаптивная разработка','Форма заявки и аналитика','Подключение домена и SSL']},
+  {slug:'mobile',tag:'MOBILE',title:'Мобильный интерфейс',text:'Мобильная версия продукта или отдельный интерфейс под iOS, Android и web.',src:'/assets/mockups/mobile-ui.svg',price:'от 59 000 ₽',features:['UX-сценарии','Mobile-first интерфейс','Анимации и состояния','Подготовка к разработке']},
+  {slug:'ai',tag:'AI',title:'AI-ассистент',text:'AI-функция или ассистент, встроенный в сайт, сервис или бизнес-процесс.',src:'/assets/mockups/ai-interface.svg',price:'от 39 000 ₽',features:['Сценарии AI','Подключение модели','Контекст и инструкции','Интеграция с продуктом']},
+  {slug:'telegram',tag:'TELEGRAM',title:'Telegram-бот',text:'Бот для заявок, продаж, уведомлений, поддержки и автоматизации.',src:'/assets/mockups/telegram-bot.svg',price:'от 29 000 ₽',features:['Сценарии бота','Кнопки и меню','Уведомления','Интеграции']},
+  {slug:'crm',tag:'CRM',title:'CRM / личный кабинет',text:'Внутренняя система для клиентов, менеджеров и операционных процессов.',src:'/assets/mockups/crm-system.svg',price:'от 79 000 ₽',features:['Роли и доступы','Рабочие кабинеты','Статусы и данные','Интеграции']},
+  {slug:'automation',tag:'OPS',title:'Автоматизация',text:'Связываем формы, CRM, Telegram, почту, платежи и другие сервисы.',src:'/assets/mockups/automation.svg',price:'от 25 000 ₽',features:['Аудит процесса','Сценарий автоматизации','Интеграции','Логи и контроль']},
+  {slug:'support',tag:'SUPPORT',title:'Поддержка и развитие',text:'Регулярные улучшения, контент, исправления и развитие цифрового продукта.',src:'/assets/mockups/support.svg',price:'от 15 000 ₽/мес.',features:['Техническая поддержка','Новые функции','Контентные изменения','Мониторинг']},
+  {slug:'hosting',tag:'HOSTING',title:'Хостинг и запуск',text:'Разворачиваем проект, подключаем домен, SSL, DNS и базовую инфраструктуру.',src:'/assets/mockups/hosting.svg',price:'от 7 000 ₽',features:['Деплой','Домен и DNS','SSL','Базовый мониторинг']},
+  {slug:'domain',tag:'DOMAIN',title:'Домен и настройка',text:'Помогаем выбрать, зарегистрировать и корректно настроить домен проекта.',src:'/assets/mockups/domain.svg',price:'от 3 000 ₽',features:['Подбор домена','DNS','SSL','Почта проекта']},
+];
+];
+
 const showcase = [
   { src:'/assets/mockups/web-product.svg', tag:'WEB', title:'Цифровой продукт', text:'Сайт с характером, системой и понятным сценарием.' },
   { src:'/assets/mockups/mobile-ui.svg', tag:'MOBILE', title:'Мобильный интерфейс', text:'Продукт, который одинаково хорошо ощущается на каждом экране.' },
@@ -43,6 +56,23 @@ const reveal: Variants = {
   show:{ opacity:1, y:0, transition:{ duration:.7, ease:'easeOut' } }
 };
 
+function MarketPage(){
+  return <main className="market-page">
+    <nav className="nav"><a className="brand" href="/"><span className="brand-mark">N</span><span>NEXUM CLOUD</span></a><div className="nav-links"><a href="/">Студия</a><a className="active" href="/market">Маркет</a><a href="/#projects">Проекты</a></div><a className="nav-cta glass-button" href="/#contact">Обсудить проект <ArrowUpRight size={15}/></a></nav>
+    <section className="market-hero"><p className="eyebrow">NEXUM CLOUD / MARKET</p><h1>Готовые решения.<br/><em>Собраны под задачу.</em></h1><p>Выберите услугу, откройте продукт и посмотрите, что входит в работу, сроки и стоимость.</p></section>
+    <section className="market-grid">{marketProducts.map((p,i)=><motion.a href={`/market/${p.slug}`} className="market-card" key={p.slug} initial={{opacity:0,y:24}} whileInView={{opacity:1,y:0}} viewport={{once:true,amount:.1}} transition={{delay:i*.035}} whileHover={{y:-8}}><div className="market-card-visual"><img src={p.src} alt=""/><span>{p.tag}</span></div><div className="market-card-info"><div><small>{String(i+1).padStart(2,'0')}</small><h2>{p.title}</h2><p>{p.text}</p></div><div className="market-card-bottom"><b>{p.price}</b><span><ArrowUpRight size={17}/></span></div></div></motion.a>)}</section>
+    <footer className="footer-v2"><div><b>NEXUM CLOUD</b><span>Цифровые продукты и системы.</span></div><a href="/#contact">Обсудить проект <ArrowUpRight size={15}/></a></footer>
+  </main>
+}
+
+function ProductPage({product}:{product:typeof marketProducts[number]}){
+  return <main className="product-page"><nav className="nav"><a className="brand" href="/"><span className="brand-mark">N</span><span>NEXUM CLOUD</span></a><div className="nav-links"><a href="/market">Маркет</a><a href="/#projects">Проекты</a></div><a className="nav-cta glass-button" href="/#contact">Обсудить проект <ArrowUpRight size={15}/></a></nav>
+    <section className="product-hero"><div className="product-copy"><a className="product-back" href="/market">← Вернуться в Маркет</a><p className="eyebrow">{product.tag} / NEXUM CLOUD</p><h1>{product.title}</h1><p>{product.text}</p><strong>{product.price}</strong><a className="primary glass-button" href="/#contact">Заказать продукт <ArrowUpRight size={16}/></a></div><div className="product-mockup"><img src={product.src} alt={product.title}/></div></section>
+    <section className="product-details"><div><p className="eyebrow">ЧТО ВХОДИТ</p><h2>Собираем продукт<br/><em>от идеи до запуска.</em></h2></div><div className="product-features">{product.features.map((f,i)=><div key={f}><span>0{i+1}</span><b>{f}</b><Check size={17}/></div>)}</div></section>
+    <section className="product-cta"><p className="eyebrow">ГОТОВЫ НАЧАТЬ?</p><h2>Расскажите, что<br/><em>нужно собрать.</em></h2><a className="primary glass-button" href="/#contact">Обсудить задачу <ArrowUpRight size={16}/></a></section>
+  </main>
+}
+
 export default function App(){
   const { scrollYProgress } = useScroll();
   const heroY = useTransform(scrollYProgress,[0,.2],[0,-80]);
@@ -59,13 +89,17 @@ export default function App(){
   const heroWords = ['WEB','AI','3D','SYSTEM'];
   const activeDirection = directions[direction];
 
+  if(window.location.pathname==='/market') return <MarketPage />;
+  const product=marketProducts.find(p=>window.location.pathname===`/market/${p.slug}`);
+  if(product) return <ProductPage product={product} />;
+
   return <main>
     <motion.div className="scroll-progress" style={{scaleX:scrollYProgress}} />
 
     <nav className="nav">
       <a className="brand" href="#"><span className="brand-mark">N</span><span>NEXUM CLOUD</span></a>
       <div className="nav-links">
-        <a href="#about">Студия</a><a href="#showcase">Витрина</a><a href="#services">Услуги</a><a href="#projects">Проекты</a>
+        <a href="#about">Студия</a><a href="#showcase">Витрина</a><a href="/market">Маркет</a><a href="#projects">Проекты</a>
       </div>
       <a className="nav-cta glass-button" href="#contact">Обсудить проект <ArrowUpRight size={15}/></a>
     </nav>
